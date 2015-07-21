@@ -1,0 +1,219 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2015-07-17 03:04+0100\n"
+"PO-Revision-Date: 2015-07-17 03:04+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.5\n"
+"X-Poedit-Basepath: D:\\Web\\www\\wf3\\framework\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-KeywordsList: {t}\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: controllers/ContactController.class.php:28
+msgid "Lastname is mandatory"
+msgstr ""
+
+#: controllers/ContactController.class.php:29
+msgid "Firstname is mandatory"
+msgstr ""
+
+#: controllers/ContactController.class.php:30
+msgid "Email is mandatory and must be valid"
+msgstr ""
+
+#: controllers/ContactController.class.php:31
+msgid "Message is mandatory"
+msgstr ""
+
+#: controllers/ContactController.class.php:32
+msgid "You have to accept CGU"
+msgstr ""
+
+#: controllers/ContactController.class.php:64
+msgid "Lastname"
+msgstr "Nom"
+
+#: controllers/ContactController.class.php:65
+msgid "Firstname"
+msgstr "Prénom"
+
+#: controllers/ContactController.class.php:66
+msgid "Email"
+msgstr "Email"
+
+#: controllers/ContactController.class.php:67
+msgid "Message"
+msgstr "Message"
+
+#: controllers/ContactController.class.php:68
+msgid "Subscribe to the newsletter"
+msgstr "S'abonner à la newsletter"
+
+#: controllers/ContactController.class.php:69
+msgid "Accept the CGU"
+msgstr "Accepter les CGU"
+
+#: core/Lang/dummy.php:6
+msgid "january"
+msgstr "janvier"
+
+#: core/Lang/dummy.php:7
+msgid "february"
+msgstr "février"
+
+#: core/Lang/dummy.php:8
+msgid "march"
+msgstr "mars"
+
+#: core/Lang/dummy.php:9
+msgid "april"
+msgstr "avril"
+
+#: core/Lang/dummy.php:10
+msgid "may"
+msgstr "mai"
+
+#: core/Lang/dummy.php:11
+msgid "june"
+msgstr "juin"
+
+#: core/Lang/dummy.php:12
+msgid "july"
+msgstr "juillet"
+
+#: core/Lang/dummy.php:13
+msgid "august"
+msgstr "août"
+
+#: core/Lang/dummy.php:14
+msgid "september"
+msgstr "septembre"
+
+#: core/Lang/dummy.php:15
+msgid "october"
+msgstr "octobre"
+
+#: core/Lang/dummy.php:16
+msgid "november"
+msgstr "novembre"
+
+#: core/Lang/dummy.php:17
+msgid "december"
+msgstr "décembre"
+
+#: index.php:77
+msgid "Home"
+msgstr "Accueil"
+
+#: index.php:78 templates\archives.tpl:4
+msgid "Archives"
+msgstr "Archives"
+
+#: index.php:79 templates\search.tpl:4 templates\search.tpl:14
+msgid "Search"
+msgstr "Rechercher"
+
+#: index.php:80
+msgid "Contact"
+msgstr "Contact"
+
+#: lang.php:71
+msgid "Hello world !"
+msgstr "Bonjour tout le monde !"
+
+#: lang.php:73
+msgid "Welcome !"
+msgstr "Bienvenue !"
+
+#: templates\404.tpl:11
+msgid "Page not found"
+msgstr "Page non trouvée"
+
+#: templates\500.tpl:11
+msgid "Internal server error"
+msgstr "Erreur serveur interne"
+
+#: templates\archives.tpl:14 templates\index.tpl:13
+msgid "No post"
+msgstr "Aucun article"
+
+#: templates\archives.tpl:14 templates\index.tpl:13
+msgid "posts"
+msgstr "articles"
+
+#: templates\archives.tpl:14 templates\index.tpl:13
+msgid "post"
+msgstr "article"
+
+#: templates\archives.tpl:14
+msgid "in"
+msgstr "en"
+
+#: templates\contact.tpl:16
+msgid "Your message was sent succesfully, you will be redirected in 3 seconds..."
+msgstr ""
+
+#: templates\partials\footer.tpl:6
+msgid "Back to top"
+msgstr "Haut de page"
+
+#: templates\partials\pagination.tpl:15
+msgid "First"
+msgstr "Premier"
+
+#: templates\partials\pagination.tpl:16
+msgid "Previous"
+msgstr "Précédent"
+
+#: templates\partials\pagination.tpl:26
+msgid "Page"
+msgstr "Page"
+
+#: templates\partials\pagination.tpl:34
+msgid "Next"
+msgstr "Suivant"
+
+#: templates\partials\pagination.tpl:35
+msgid "Last"
+msgstr "Dernier"
+
+#: templates\partials\post-list-item.tpl:5 templates\post-full.tpl:17
+#: templates\post.tpl:17
+msgid "by"
+msgstr "par"
+
+#: templates\partials\post-list-item.tpl:10
+msgid "Read more"
+msgstr "Lire la suite"
+
+#: templates\post-full.tpl:12 templates\post.tpl:12
+msgid "Back to posts"
+msgstr "Retour aux articles"
+
+#: templates\search.tpl:27
+msgid "No result"
+msgstr "Aucun résultat"
+
+#: templates\search.tpl:27
+msgid "results"
+msgstr "résultats"
+
+#: templates\search.tpl:27
+msgid "result"
+msgstr "résultat"
+
+#: templates\search.tpl:27
+msgid "for the search"
+msgstr "pour la recherche"
+
+#~ msgid "1 post"
+#~ msgstr "1 article"
+
+#~ msgid "from"
+#~ msgstr "depuis"

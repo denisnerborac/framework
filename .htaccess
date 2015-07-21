@@ -1,0 +1,15 @@
+Options -Indexes
+Options +FollowSymLinks
+
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !public
+RewriteCond %{QUERY_STRING} (.*)
+
+RewriteRule ^public$ / [L,R=301]
+RewriteRule ^\/$ public [L,R=301]
+RewriteRule ^([a-zA-Z0-9\-\_\/]*)$ public/index.php?do=$1 [QSA,L]
+
+#Redirect public ../
+#ErrorDocument 500 /500.html
