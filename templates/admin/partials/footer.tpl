@@ -13,15 +13,5 @@
 	<script src="{$JS_ROOT}admin/dataTables.bootstrap.min.js"></script>
     <script src="{$JS_ROOT}admin/admin.js"></script>
 
-	<script>
-	$(document).ready(function() {
-		if ($('#data-table').length > 0) {
-			$('#data-table').DataTable({
-				responsive: true
-			});
-		}
-	});
-	</script>
-
 </body>
 </html>
