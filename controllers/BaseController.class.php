@@ -30,4 +30,19 @@ abstract class BaseController {
 		$this->controller->response->addVars($vars);
 	}
 
+	public function getParams() {
+		return $this->controller->request->getParams();
+	}
+
+	public function getParam($param, $default = null) {
+		return $this->controller->request->getParam($param, $default);
+	}
+
+	public function view($template, $vars = array()) {
+		return $this->render($template, $vars);
+	}
+
+	public function render($template, $vars = array()) {
+		return $this->controller->response->render($template, $vars);
+	}
 }
