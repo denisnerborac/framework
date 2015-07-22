@@ -46,11 +46,11 @@ abstract class BaseController {
 	}
 
 	public function getParams() {
-		return $this->controller->request->getParams();
+		return $this->controller->getParams();
 	}
 
 	public function getParam($param, $default = null) {
-		return $this->controller->request->getParam($param, $default);
+		return $this->controller->getParam($param, $default);
 	}
 
 	public function view($template, $vars = array()) {
