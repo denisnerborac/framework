@@ -7,6 +7,10 @@ class Post extends Model {
 	private $content;
 	private $date;
 
+	/* Getters */
+	public function getId() {
+		return $this->id;
+	}
 	public function getAuthor() {
 		return $this->author;
 	}
@@ -20,6 +24,10 @@ class Post extends Model {
 		return $this->date;
 	}
 
+	/* Setters */
+	public function setId($id) {
+		$this->id = $id;
+	}
 	public function setAuthor($author) {
 		$this->author = $author;
 	}

@@ -2,10 +2,13 @@ $(function() {
 
     $('#side-menu').metisMenu();
 
-    if ($('#data-table').length > 0) {
-        $('#data-table').DataTable({
-            responsive: true
-        });
+    if ($('table.table').length > 0) {
+        $('table.table').each(function() {
+            var id = $(this).attr('id');
+            $('#'+id).DataTable({
+                responsive: true
+            });
+        })
     }
 
     //Loads the correct sidebar on window load,

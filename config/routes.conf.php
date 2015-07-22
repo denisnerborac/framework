@@ -3,6 +3,7 @@
 global $routes;
 
 $routes = array(
+	/* Front */
 	'/' => array(
 		'target' => 'home',
 		'action' => 'index'
@@ -19,4 +20,14 @@ $routes = array(
 		'target' => 'search',
 		'action' => 'results'
 	),
+
+	/* Backoffice */
+	'admin/contact/edit/([0-9\-]+)' => array(
+		'target' => 'admin',
+		'action' => 'contact_edit'
+	),
+	'admin/contact/delete/([0-9\-]+)' => array(
+		'target' => 'admin',
+		'action' => 'contact_delete'
+	)
 );
