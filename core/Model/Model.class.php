@@ -10,6 +10,9 @@ abstract class Model extends Core {
 
 	public static function getById($id) {
 		$result = Db::selectOne('SELECT * FROM '.self::getDbTable().' WHERE id = :id', array('id' => $id));
+		if (empty($result)) {
+			return null;
+		}
 		$class = get_called_class();
 		return new $class($result);
 	}
