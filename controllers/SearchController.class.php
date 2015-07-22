@@ -15,7 +15,7 @@ class SearchController extends BaseController {
 		}
 		*/
 
-		$params = $this->controller->getParams();
+		$params = $this->getParams();
 
 		$search_query = $this->controller->request->get('q', '');
 		$page = !empty($params[0]) ? (int) $params[0] : 1;
@@ -42,7 +42,7 @@ class SearchController extends BaseController {
 			));
 		}
 
-		$this->controller->response->render('search', $vars);
+		$this->render('search', $vars);
 	}
 
 }

@@ -1,28 +1,13 @@
 <?php
-abstract class BaseAdminController {
-
-	protected $controller;
+abstract class BaseAdminController extends BaseController {
 
 	public function __construct($controller) {
 
-		$this->controller = $controller;
+		parent::__construct($controller);
 
-		$vars = array(
-			'HTTP_ROOT' => ROOT_HTTP.$controller->lang->getUserLang().'/',
-			'CSS_ROOT' => CSS_HTTP,
-			'JS_ROOT' => JS_HTTP,
-			'IMG_ROOT' => IMG_HTTP,
-			'referer' => REFERER,
-			'uri' => $controller->getUri(),
-			'querystring' => $controller->getQueryString(),
-			'current_page' => $controller->route,
-			'target' => $controller->target,
-			'action' => $controller->action,
-			'lang' => $controller->lang->getUserLang(),
-			'website_title' => 'Admin',
-			'website_description' => 'Admin Description',
-			'author' => 'Admin Author'
-		);
+		$vars['website_title'] = 'Backoffice';
+		$vars['website_description'] = 'Admin Description';
+		$vars['author'] = 'Admin Author';
 
 		$vars['pages'] = array(
 			'admin/index/' => array('Dashboard', 'fa-dashboard'),
@@ -32,5 +17,4 @@ abstract class BaseAdminController {
 
 		$this->controller->response->addVars($vars);
 	}
-
 }

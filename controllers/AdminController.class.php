@@ -14,7 +14,7 @@ class AdminController extends BaseAdminController {
 
 		$vars = array();
 
-		$this->controller->response->render('admin/index', $vars);
+		$this->render('admin/index', $vars);
 	}
 
 	public function post() {
@@ -23,24 +23,36 @@ class AdminController extends BaseAdminController {
 
 		$vars = array('posts' => $posts);
 
-		$this->controller->response->render('admin/post', $vars);
+		$this->render('admin/post', $vars);
 	}
 
 	public function contact() {
 
-		$contact = Contact::get(1);
+		$id = $this->getParam(0, 0);
 
-		$form = $contact->getForm();
+		$isPost = $this->controller->request->isPost();
+		$errors = array();
+
+		$contact = new Contact();
+		if (!empty($id)) {
+			$contact = Contact::get($id);
+			if (empty($contact)) {
+				throw new Exception('Undefined contact with id = ['.$id.']');
+			}
+		}
+
+		// $id, $name, $action, $method, $class, $errors, $isPost
+		$form = $contact->getForm('form-contact-admin', 'form-contact-admin', ROOT_HTTP.'admin/contact', 'POST', 'form-horizontal', $errors, $isPost);
 
 		$vars['form'] = $form;
 
-		$this->controller->response->render('admin/contact', $vars);
+		$this->render('admin/contact', $vars);
 	}
 
 	public function search() {
 
 		$vars = array();
 
-		$this->controller->response->render('admin/search', $vars);
+		$this->render('admin/search', $vars);
 	}
 }

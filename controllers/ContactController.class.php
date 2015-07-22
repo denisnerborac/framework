@@ -28,17 +28,17 @@ class ContactController extends BaseController {
 
 				if ($result = $contact->insert()) {
 					$vars['redirectJS'] = Utils::redirectJS(ROOT_HTTP, 3);
-					$this->controller->response->render('contact', $vars);
+					$this->render('contact', $vars);
 					return false;
 				}
 			}
 		}
 
-		$form = $contact->getForm($errors, $isPost);
+		$form = $contact->getForm($id = 'form-contact', $name = 'form-contact', $action = ROOT_HTTP.'contact/post', 'POST', 'form-horizontal', $errors, $isPost);
 
 		$vars['form'] = $form;
 
-		$this->controller->response->render('contact', $vars);
+		$this->render('contact', $vars);
 	}
 
 	public function post() {

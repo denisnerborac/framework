@@ -15,9 +15,9 @@ class Contact extends Model {
 		return $vars;
 	}
 
-	public function getForm($errors = array(), $isPost = false) {
+	public function getForm($id = '', $name = '', $action = '', $method = 'POST', $class = 'form-horizontal', $errors = array(), $isPost = false) {
 
-		$form = new Form('form_contact', '', ROOT_HTTP.'contact/post', 'POST', 'form-horizontal', $isPost);
+		$form = new Form($id, $name, $action, $method, $class, $isPost);
 		$form->addField('lastname', Lang::_('Lastname'), 'text', $this->lastname, true, '', @$errors['lastname']);
 		$form->addField('firstname', Lang::_('Firstname'), 'text', $this->firstname, true, '', @$errors['firstname']);
 		$form->addField('email', Lang::_('Email'), 'email', $this->email, true, '', @$errors['email']);

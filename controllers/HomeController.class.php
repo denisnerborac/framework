@@ -4,7 +4,7 @@ class HomeController extends BaseController {
 
 	public function index() {
 
-		$page = (int) $this->controller->getParam(0, 1);
+		$page = (int) $this->getParam(0, 1);
 
 		$pagination = new Pagination('SELECT * FROM posts ORDER BY date DESC', array(), 4, $page - 1);
 
@@ -17,6 +17,6 @@ class HomeController extends BaseController {
 			'count_total' => $pagination->getTotalCount()
 		);
 
-		$this->controller->response->render('index', $vars);
+		$this->render('index', $vars);
 	}
 }

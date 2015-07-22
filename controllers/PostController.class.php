@@ -4,7 +4,7 @@ class PostController extends BaseController {
 
 	public function view() {
 
-		$params = $this->controller->getParams();
+		$params = $this->getParams();
 
 		if (empty($params[0])) {
 			throw new ActionControllerException('Undefined post id');
@@ -25,7 +25,7 @@ class PostController extends BaseController {
 
 	public function archives() {
 
-		$params = $this->controller->getParams();
+		$params = $this->getParams();
 
 		$date = !empty($params[0]) ? $params[0] : date('Y-m');
 		$page = !empty($params[1]) ? (int) $params[1] : 1;
@@ -55,7 +55,7 @@ class PostController extends BaseController {
 			'posts' => $pagination->getResults()
 		);
 
-		$this->controller->response->render('archives', $vars);
+		$this->render('archives', $vars);
 	}
 
 }
