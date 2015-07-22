@@ -15,8 +15,8 @@
             <td>{$data->$col}</td>
             {/foreach}
             <td class="center">
-          		<a href=""><i class="fa fa-pencil fa-fw"></i></a>
-          		<a href=""><i class="fa fa-trash fa-fw"></i></a>
+          		<a href="{$this->edit_url}/{$data->id}"><i class="fa fa-pencil fa-fw"></i></a>
+          		<a href="{$this->delete_url}/{$data->id}"><i class="fa fa-trash fa-fw"></i></a>
             </td>
         </tr>
         {assign var=i value=$i + 1}
