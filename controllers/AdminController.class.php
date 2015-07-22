@@ -19,12 +19,7 @@ class AdminController extends BaseAdminController {
 
 	public function post() {
 
-		$query = Db::select('SELECT * FROM posts ORDER BY title ASC');
-
-		$posts = array();
-		foreach($query as $_post) {
-			$posts[] = new Post($_post);
-		}
+		$posts = Post::getList('SELECT * FROM posts ORDER BY title ASC');
 
 		$vars = array('posts' => $posts);
 

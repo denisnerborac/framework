@@ -12,9 +12,7 @@ class PostController extends BaseController {
 
 		$post_id = (int) $params[0];
 
-		$result = Db::selectOne('SELECT * FROM posts WHERE id = :id', array(':id' => $post_id));
-
-		$post = new Post($result);
+		$post = Post::get($post_id);
 
 		$vars = array(
 			'title' => 'Title',
