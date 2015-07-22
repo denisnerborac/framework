@@ -42,10 +42,6 @@ abstract class BaseController {
 
 		$vars['archives_dates'] = $archives_dates;
 
-		/*echo '<pre>';
-		print_r($vars);
-		echo '</pre>';*/
-
 		$this->controller->response->addVars($vars);
 	}
 
