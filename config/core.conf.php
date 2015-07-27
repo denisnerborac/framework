@@ -52,7 +52,7 @@ define('SESSION_DEFAULT_NAME', 'framework_session');
 if ($_SERVER['HTTP_HOST'] == 'localhost') {
 	define('DB_HOST', 'localhost');
 	define('DB_USER', 'root');
-	define('DB_PASS', 'kilomi');
+	define('DB_PASS', '');
 } else {
 	define('DB_HOST', '');
 	define('DB_USER', '');
