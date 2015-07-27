@@ -28,7 +28,7 @@ function autoload($class) {
 
     $root_class_folders = array(
         CORE_PATH.$class_folder.'/',
-        CONTROLLERS_PATH.'/',
+        CONTROLLERS_PATH,
         MODELS_PATH.$class_folder.'/'
     );
 

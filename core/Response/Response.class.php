@@ -1,5 +1,4 @@
 <?php
-
 class Response
 {
 	public $vars = array();
@@ -23,18 +22,18 @@ class Response
 
 	public function render($template, $_vars = array(), $fetch = false) {
 
-		$tpl = new Template($template);
+		$view = new View($template);
 
 		$this->addVars($_vars);
 
 		foreach($this->vars as $key => $var) {
-			$tpl->assign($key, $var);
+			$view->assign($key, $var);
 		}
 
 		if ($fetch === true) {
-			return $tpl->fetch($tpl->getTemplate());
+			return $view->fetch($view->getTemplate());
 		}
-		$tpl->display($tpl->getTemplate());
+		$view->display($view->getTemplate());
 
 		return true;
 	}

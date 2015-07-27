@@ -3,11 +3,9 @@
 class Authent {
 
 	const REMEMBER_ME_SECRET_KEY = 'ImNH7OI%$n7E$pi?8ZHB3ugOB3t*gx&I';
+	const REMEMBER_ME_EXPIRATION = 604800; // 60 * 60 * 24 * 7 = 7 jours
 
-	/*
-	Default expiration = 604800 (60 * 60 * 24 * 7 = 7 days)
-	*/
-	public static function setRememberMe($user_id, $expiration = 604800) {
+	public static function setRememberMe($user_id, $expiration = self::REMEMBER_ME_EXPIRATION) {
 
 		$protocol = $_SERVER['REQUEST_SCHEME']; // Contient le protocole en cours http ou https
 		$current_time = time(); // On définit le timestamp actuel
@@ -29,10 +27,7 @@ class Authent {
 		setcookie('rememberme_token', $crypted_token, $current_time + $expiration);
 	}
 
-	/*
-	Default expiration = 604800 (60 * 60 * 24 * 7 = 7 days)
-	*/
-	public static function getRememberMe($expiration = 604800) {
+	public static function getRememberMe($expiration = self::REMEMBER_ME_EXPIRATION) {
 
 		if (empty($_COOKIE['rememberme_data']) || empty($_COOKIE['rememberme_token'])) {
 			return false;

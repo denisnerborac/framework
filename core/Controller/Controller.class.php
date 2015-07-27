@@ -1,5 +1,4 @@
 <?php
-
 abstract class Controller {
 
 	public $lang;
@@ -14,15 +13,16 @@ abstract class Controller {
 	public $request;
 	public $response;
 	public $redirected;
+	public $session = null;
 
-	public function __construct(Request $request, Response $response) {
-		$this->request = $request;
-		$this->response = $response;
+	public function __construct() {
+		$this->request = new Request();
+		$this->response = new Response();
 		$this->redirected = false;
 		$this->setParams();
 	}
 
-	protected function setParams() {
+	protected function setParams($session = null) {
 
 		global $routes;
 
@@ -40,22 +40,13 @@ abstract class Controller {
 
 
 		$lang = !empty($matches['lang']) ? $matches['lang'] : '';
-		$this->target = !empty($matches['target']) ? $matches['target'] : 'home';
-		$this->action = !empty($matches['action']) ? $matches['action'] : 'index';
+		$this->target = !empty($matches['target']) ? $matches['target'] : DEFAULT_CONTROLLER_TARGET;
+		$this->action = !empty($matches['action']) ? $matches['action'] : DEFAULT_CONTROLLER_ACTION;
 		$this->params = !empty($matches['params']) ? explode('/', $matches['params']) : array();
-
-		/*
-		echo 'LANG >> '.$lang.'<br>';
-		echo 'TARGET >> '.print_r($this->target, true).'<br>';
-		echo 'ACTION >> '.print_r($this->action, true).'<br>';
-		echo 'PARAMS >> '.print_r($this->params, true).'<br>';
-		*/
 
 		$router = new Router($lang, $routes);
 		$router->dispatch($this);
 
-		//$path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
-		//$root_path = trim(ROOT_DIR.'/'.(!empty($lang) ? $lang : ''), '/');
 		$this->route = $this->target.'/'.$this->action.'/'.implode('/', $this->params);
 		$this->uri = ROOT_HTTP.$this->target.'/'.$this->action.'/';
 
@@ -72,6 +63,8 @@ abstract class Controller {
 			$this->post = Utils::stripslashes($this->post);
 			$this->get = Utils::stripslashes($this->get);
 		}
+
+		$this->session = $session;
 	}
 
 	public function getParam($param, $default = null) {
@@ -94,12 +87,16 @@ abstract class Controller {
 		return $this->request;
 	}
 
+	public function render($template, $vars = array()) {
+		return $this->response->render($template, $vars);
+	}
+
 	public function redirect($url) {
 		if ($this->redirected == true) {
 			throw new Exception('Already redirected');
 		}
-		$this->response->redirect($url);
 		$this->redirected = true;
+		$this->response->redirect($url);
 	}
 
 	public function __get($param) {

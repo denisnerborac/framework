@@ -18,6 +18,8 @@ class Session {
 		$this->_session_id = session_id();
 		$this->_session = array_merge($this->_session, !empty($_SESSION) ? $_SESSION : array());
 		$this->_clean();
+
+		return true;
 	}
 
 	public function __set($key, $value) {
@@ -38,8 +40,7 @@ class Session {
 
 	protected function _save() {
 		try {
-			if ($this->isActive())
-			{
+			if ($this->isActive()) {
 				$_SESSION = $this->_session;
 				return true;
 			}
@@ -56,8 +57,7 @@ class Session {
 		$this->_session_id = 0;
 		$this->_save();
 
-		if ($this->isActive())
-		{
+		if ($this->isActive()) {
 			if (ini_get("session.use_cookies")) {
 				$params = session_get_cookie_params();
 				setcookie(session_name(), '', 1,

@@ -9,9 +9,8 @@ class API_Instagram {
 
 	public static function getInstance() {
 
-		$api_key = self::INSTAGRAM_API_KEY;
-		if (empty($api_key)) {
-			throw new Exception(__CLASS__.' Error - Undefined INSTAGRAM_API_KEY');
+		if (!strlen(self::INSTAGRAM_API_KEY)) {
+			throw new Exception(__CLASS__.' Error - Invalid Instagram API configuration');
 		}
 
 		if(!isset(self::$instance)) {

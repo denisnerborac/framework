@@ -1,5 +1,4 @@
 <?php
-
 class Lang {
 
     const GETTEXT_MODE_NATIVE = 1;
@@ -65,6 +64,7 @@ class Lang {
 
     private static function _getTextMode() {
         if (!function_exists('getText') || strncasecmp(PHP_OS, 'WIN', 3) == 0) {
+            require_once('gettext.inc');
             return self::GETTEXT_MODE_LIBRARY;
         }
         return self::GETTEXT_MODE_NATIVE;
@@ -109,7 +109,6 @@ class Lang {
             bind_textdomain_codeset($config["domain"], $config["encoding"]);
             textdomain($config["domain"]);
         } else {
-            require_once('gettext.inc');
             T_setlocale(LC_MESSAGES, $config['locale']);
             T_bindtextdomain($config['domain'], LOCALE_PATH);
             T_bind_textdomain_codeset($config['domain'], $config['encoding']);

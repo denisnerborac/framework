@@ -30,9 +30,13 @@ define('CSS_HTTP', STATICS_HTTP.'css/');
 define('JS_HTTP', STATICS_HTTP.'js/');
 define('IMG_HTTP', STATICS_HTTP.'img/');
 
+// CONTROLLERS
+define('DEFAULT_CONTROLLER_TARGET', 'home');
+define('DEFAULT_CONTROLLER_ACTION', 'index');
+
 // TEMPLATES/SMARTY
-define('TPL_PATH', ROOT_PATH.'templates/');
-define('TPL_CACHE_PATH', ROOT_PATH.'cache/templates/');
+define('TPL_PATH', ROOT_PATH.'views/');
+define('TPL_CACHE_PATH', ROOT_PATH.'cache/views/');
 define('TPL_DEBUGGING', false);
 define('TPL_CACHING', false);
 define('TPL_FORCE_COMPILE', false);
@@ -41,13 +45,14 @@ define('TPL_FORCE_COMPILE', false);
 define('REFERER', !empty($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '');
 
 // SESSION CONFIG
+define('SESSION_DISABLED', false);
 define('SESSION_DEFAULT_NAME', 'framework_session');
 
 // DB CONFIG
 if ($_SERVER['HTTP_HOST'] == 'localhost') {
 	define('DB_HOST', 'localhost');
 	define('DB_USER', 'root');
-	define('DB_PASS', '');
+	define('DB_PASS', 'kilomi');
 } else {
 	define('DB_HOST', '');
 	define('DB_USER', '');

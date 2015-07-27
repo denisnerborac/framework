@@ -37,4 +37,8 @@ class Form {
 		return $response->render('partials/form.tpl', $vars, $fetch = true);
 	}
 
+	public function __toString() {
+		return $this->render();
+	}
+
 }

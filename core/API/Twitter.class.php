@@ -19,9 +19,11 @@ class API_Twitter {
 
 	public static function getChannel($params = array()) {
 
-		$api_key = self::TWITTER_API_KEY;
-		if (empty($api_key)) {
-			throw new Exception(__CLASS__.' Error - Undefined TWITTER_API_KEY');
+		if (!strlen(self::TWITTER_API_KEY) ||
+			!strlen(self::TWITTER_SECRET_KEY) ||
+			!strlen(self::TWITTER_ACCESS_TOKEN) ||
+			!strlen(self::TWITTER_ACCESS_TOKEN_SECRET)) {
+			throw new Exception(__CLASS__.' Error - Invalid Twitter API configuration');
 		}
 
 		$params = array_merge(self::$default_params, $params);

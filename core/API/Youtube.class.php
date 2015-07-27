@@ -18,13 +18,12 @@ class API_Youtube {
 
 	public static function getChannel($channel) {
 
-		if (empty($channel)) {
-			throw new Exception(__CLASS__.' Error - Undefined Youtube Channel');
+		if (!strlen(self::YOUTUBE_API_KEY)) {
+			throw new Exception(__CLASS__.' Error - Undefined Youtube API configuration');
 		}
 
-		$api_key = self::YOUTUBE_API_KEY;
-		if (empty($api_key) {
-			throw new Exception(__CLASS__.' Error - Undefined YOUTUBE_API_KEY');
+		if (empty($channel)) {
+			throw new Exception(__CLASS__.' Error - Undefined Youtube Channel');
 		}
 
 		$feed = @file_get_contents('https://www.googleapis.com/youtube/v3/search?key='.self::YOUTUBE_API_KEY.'&channelId='.$channel.'&part=snippet,id&order=date&maxResults='.self::MAX_RESULTS);

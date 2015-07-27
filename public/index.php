@@ -3,19 +3,23 @@ try {
 
 	require_once '../config/core.conf.php';
 
-	//$session = new Session(SESSION_DEFAULT_NAME);
+	$session = !SESSION_DISABLED ? new Session(SESSION_DEFAULT_NAME) : null;
 
 	header('Content-type: text/html; charset='.Lang::$encoding);
 
-	$request = new Request();
-	$response = new Response();
+	//$profiler = new Profiler();
 
-	$controller = new ActionController($request, $response);
+	$controller = new ActionController($session);
 	$controller->handle();
+
+	//$profiler->stop();
+	//echo $profiler->getSummary();
 
 } catch (Exception $e) {
 
-	if ($e instanceOf AutoloadException || $e instanceOf TemplateException) {
+	$response = new Response();
+
+	if ($e instanceOf AutoloadException || $e instanceOf ViewException) {
         $response->render('500');
     }
 
@@ -24,11 +28,11 @@ try {
 	}
 
 	$class_exception = get_class($e);
+	$msg_exception = $class_exception.' : '.$e->getMessage();
 
-	Logger::log($class_exception.' : '.$e->getMessage());
+	Logger::log($msg_exception);
 
 	if (CORE_DEBUG) {
-		echo '<pre>'.$e.'</pre>';
+		echo '<pre>'.$msg_exception.'</pre>';
     }
 }
-?>

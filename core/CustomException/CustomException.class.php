@@ -1,5 +1,4 @@
 <?php
-
 interface IException {
     public function getClass();
 	public function getMessage();

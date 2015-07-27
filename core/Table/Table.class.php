@@ -19,10 +19,9 @@ class Table {
 		$this->delete_url = $delete_url;
 	}
 
-	public function get() {
+	public function render() {
 		$response = new Response();
-
-		return $response->render('partials/table', array('this' => $this), $fetch = true);
+		return $response->render('partials/table', array('table' => $this), $fetch = true);
 	}
 
 }

@@ -69,6 +69,11 @@ class Utils {
 		return '<script>setTimeout(function() { window.location.href = "'.$page.'"; }, '.($delay * 1000).');</script>';
 	}
 
+	public static function getSize($bytes)	{
+	    $units = array('o','ko','mo','go','to','po');
+	    return @round($bytes / pow(1024, ($i = floor(log($bytes, 1024)))), 2).' '.$units[$i];
+	}
+
 	public static function getRandomTime() {
 		return strtotime(getRandomDate());
 	}

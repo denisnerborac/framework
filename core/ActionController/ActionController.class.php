@@ -1,16 +1,9 @@
 <?php
-
 class ActionControllerException extends CustomException {}
 
 class ActionController extends Controller {
 
-    public function __construct(Request $request, Response $response) {
-
-        parent::__construct($request, $response);
-
-	}
-
-	public function handle() {
+    public function handle() {
 
         $class = ucfirst($this->target).'Controller';
 		$method = strtolower($this->action);
@@ -19,7 +12,7 @@ class ActionController extends Controller {
 			throw new ActionControllerException('Undefined class '.$class.' from target '.$this->target);
         }
 
-        $controller = new $class($this);
+        $controller = new $class();
 
 		if (!method_exists($class, $method)) {
 			throw new ActionControllerException('Undefined action '.$this->action.' in class '.$class);

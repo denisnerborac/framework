@@ -18,18 +18,13 @@ class API_Facebook {
 
 	public static function getChannel($channel) {
 
+		if (!strlen(self::FACEBOOK_APP_ID) ||
+			!strlen(self::FACEBOOK_SECRET_KEY)) {
+			throw new Exception(__CLASS__.' Error - Invalid Facebook API configuration');
+		}
+
 		if (empty($channel)) {
 			throw new Exception(__CLASS__.' Error - Undefined Facebook channel');
-		}
-
-		$app_id = self::FACEBOOK_APP_ID;
-		if (empty($app_id)) {
-			throw new Exception(__CLASS__.' Error - Undefined FACEBOOK_APP_ID');
-		}
-
-		$secret_key = self::FACEBOOK_SECRET_KEY;
-		if (empty($secret_key)) {
-			throw new Exception(__CLASS__.' Error - Undefined FACEBOOK_SECRET_KEY');
 		}
 
 		if (version_compare(PHP_VERSION, '5.3.0') >= 0) {
