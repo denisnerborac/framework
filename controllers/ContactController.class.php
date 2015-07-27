@@ -16,7 +16,7 @@ class ContactController extends BaseController {
 		$errors = array();
 		if ($isPost) {
 
-			foreach($contact->getFields() as $key => $value) {
+			foreach($contact->getDbFields() as $key => $value) {
 				try {
 					$contact->$key = $this->request->post($key, '');
 				} catch (Exception $e) {
@@ -29,7 +29,7 @@ class ContactController extends BaseController {
 				if ($result = $contact->insert()) {
 					$vars['redirectJS'] = Utils::redirectJS(ROOT_HTTP, 3);
 					$this->render('contact', $vars);
-					return false;
+					return true;
 				}
 			}
 		}

@@ -28,8 +28,12 @@ abstract class BaseController extends Controller {
 			array('url' => 'home', 'name' => Lang::_('Home')),
 			array('url' => 'post/archives', 'name' => Lang::_('Archives')),
 			array('url' => 'search', 'name' => Lang::_('Search')),
-			array('url' => 'contact', 'name' => Lang::_('Contact')),
+			array('url' => 'contact', 'name' => Lang::_('Contact'))
 		);
+
+		if (User::isLogged()) {
+			$vars['user'] = User::get($this->session->user_id);
+		}
 
 		$archives_dates = array();
 		for($i = 0; $i < 12; $i++) {

@@ -20,6 +20,19 @@ $routes = array(
 		'target' => 'search',
 		'action' => 'results'
 	),
+	'login' => array(
+		'target' => 'user',
+		'action' => 'login'
+	),
+	'register' => array(
+		'target' => 'user',
+		'action' => 'register'
+	),
+	'logout' => array(
+		'target' => 'user',
+		'action' => 'logout'
+	),
+
 
 	/* Backoffice */
 	'admin/contact/edit/([0-9\-]+)' => array(

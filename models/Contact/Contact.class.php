@@ -2,18 +2,12 @@
 class Contact extends Model {
 
 	protected $id;
-	private $lastname;
-	private $firstname;
-	private $email;
-	private $message;
-	private $newsletter;
-	private $cgu;
-
-	public function getFields() {
-		$vars = get_class_vars(get_called_class());
-		unset($vars['table']);
-		return $vars;
-	}
+	protected $lastname;
+	protected $firstname;
+	protected $email;
+	protected $message;
+	protected $newsletter;
+	protected $cgu;
 
 	public function getForm($id = '', $name = '', $action = '', $method = 'POST', $class = 'form-horizontal', $errors = array(), $isPost = false) {
 

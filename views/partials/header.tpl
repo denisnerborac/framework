@@ -16,19 +16,6 @@
 
 <body>
 
-	<div class="blog-masthead">
-		<div class="container">
-			<nav class="nav navbar-nav blog-nav">
-				{foreach from=$pages item=page}
-				<a class="blog-nav-item {if $page.url == $current_page || $page.url == $target || $page.url == "$target/$action"}active{/if}" href="{$HTTP_ROOT}{$page.url}">{$page.name}</a>
-				{/foreach}
-			</nav>
-
-			<nav class="nav navbar-nav navbar-right blog-nav">
-				<a href="{$HTTP_ROOT}../fr/{$current_page}{$querystring}" class="blog-nav-item{if $lang == 'fr'} active{/if}">FR</a>
-				<a href="{$HTTP_ROOT}../en/{$current_page}{$querystring}" class="blog-nav-item{if $lang == 'en'} active{/if}">EN</a>
-			</nav>
-		</div>
-	</div>
+	{include file="partials/navbar.tpl"}
 
 	<div class="container blog-content">
