@@ -31,7 +31,7 @@ class Authent {
 		$footprints = $protocol.'://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'].$_SERVER['HTTP_USER_AGENT'];
 
 		// On crée un jeton qui contient la clé secrète concaténée avec l'empreinte de l'utilisateur
-		$token = REMEMBER_ME_SECRET_KEY.$footprints;
+		$token = self::REMEMBER_ME_SECRET_KEY.$footprints;
 
 		// On définit une chaîne qui contient nos infos en clair
 		$user_data = $current_time.'.'.$user_id;
@@ -57,7 +57,7 @@ class Authent {
 		$footprints = $protocol.'://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'].$_SERVER['HTTP_USER_AGENT'];
 
 		// On crée un jeton qui contient la clé secrète concaténée avec l'empreinte de l'utilisateur
-		$token = REMEMBER_ME_SECRET_KEY.$footprints;
+		$token = self::REMEMBER_ME_SECRET_KEY.$footprints;
 
 		// On crypt les informations du cookie concaténées avec le jeton
 		$crypted_token = hash('sha256', $token.$_COOKIE['rememberme_data']);
