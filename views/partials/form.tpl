@@ -51,7 +51,7 @@
 				    </div>
 					{/if}
 
-					{if !empty($isSubmit) && !empty($fields[key]->error)}
+					{if !empty($isSubmit) && !empty($fields[key]->error) && $fields[key]->error !== true}
 					<label class="col-sm-2"></label>
 					<div class="col-sm-10 error" role="alert">
 						<span class="glyphicon glyphicon-warning-sign"></span> {$fields[key]->error}
