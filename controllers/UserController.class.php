@@ -38,9 +38,7 @@ class UserController extends BaseController {
 			}
 		}
 
-		$form = new Form('', 'form-login', ROOT_HTTP.'user/login', 'POST', 'form-horizontal', $errors, $isPost);
-		$form->addField('email', Lang::_('Email'), 'email', $user->email, true, '', @$errors['authent']);
-		$form->addField('password', Lang::_('Password'), 'password', $user->password, true, '', @$errors['authent']);
+		$form = $user->getLoginForm($isPost, $errors);
 
 		$vars = array(
 			'title' => 'Login',
@@ -92,11 +90,7 @@ class UserController extends BaseController {
 					$user_id = $user->register();
 
 					if (!empty($user_id)) {
-
-						$this->session->user_id = $user_id;
-						$this->session->firstname = $firstname;
-
-						$success = true;
+						$success = $this->login();
 					} else {
 						$errors['register'] = 'Register failed';
 					}
@@ -104,15 +98,7 @@ class UserController extends BaseController {
 			}
 		}
 
-		$form = new Form('', 'form-register', ROOT_HTTP.'user/register', 'POST', 'form-horizontal', $errors, $isPost);
-		$form->addField('firstname', Lang::_('Firstname'), 'text', $user->firstname, true, '', @$errors['firstname']);
-		$form->addField('lastname', Lang::_('Lastname'), 'text', $user->lastname, true, '', @$errors['lastname']);
-		$form->addField('email', Lang::_('Email'), 'email', $user->email, true, '', @$errors['email']);
-		$form->addField('confirm_email', Lang::_('Confirm email'), 'email', $confirm_email, true, '', @$errors['confirm_email']);
-		$form->addField('password', Lang::_('Password'), 'password', '', true, '', @$errors['password']);
-		$form->addField('confirm_password', Lang::_('Confirm password'), 'password', $confirm_password, true, '', @$errors['confirm_password']);
-		$form->addField('newsletter', Lang::_('Newsletter'), 'checkbox', $user->newsletter, false, '');
-		$form->addField('cgu', Lang::_('Accept the CGU'), 'checkbox', $user->cgu, true, '', @$errors['cgu']);
+		$form = $user->getRegisterForm($isPost, $errors);
 
 		$vars = array(
 			'title' => 'Register',

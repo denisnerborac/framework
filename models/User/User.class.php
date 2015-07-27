@@ -20,6 +20,7 @@ class User extends Model {
 		$this->session = Session::getInstance();
 	}
 
+	/* Getters */
 	public function getId() {
 		return $this->id;
 	}
@@ -51,6 +52,7 @@ class User extends Model {
 		return $this->register_date;
 	}
 
+	/* Setters */
 	public function setId($id) {
 		$this->id = $id;
 	}
@@ -97,6 +99,7 @@ class User extends Model {
 		$this->register_date = $register_date;
 	}
 
+	/* Misc */
 	public static function isLogged() {
 		return Session::getInstance()->user_id;
 	}
@@ -112,11 +115,7 @@ class User extends Model {
 			$user = self::get($user_id);
 
 			if (!empty($user)) {
-
-				$this->session->user_id = $user->id;
-				$this->session->firstname = $user->firstname;
-
-				return true;
+				return $user->login();
 			}
 		}
 
@@ -140,10 +139,7 @@ class User extends Model {
 					Authent::setRememberMe($user->id);
 				}
 
-				$this->session->user_id = $user->id;
-				$this->session->firstname = $user->firstname;
-
-				return true;
+				return $user->login();
 			}
 		}
 		return false;
@@ -158,6 +154,40 @@ class User extends Model {
 			return true;
 		}
 		return false;
+	}
+
+	public function getLoginForm($isPost = false, $errors = array()) {
+
+		$form = new Form('', 'form-login', ROOT_HTTP.'user/login', 'POST', 'form-horizontal', $errors, $isPost);
+		$form->addField('email', Lang::_('Email'), 'email', $this->email, true, '', @$errors['authent']);
+		$form->addField('password', Lang::_('Password'), 'password', $this->password, true, '', @$errors['authent']);
+		$form->addField('remember_me', Lang::_('Remember me'), 'checkbox', '', false, '');
+
+		return $form;
+	}
+
+	public function login() {
+		if (!$this->session->isActive()) {
+			return false;
+		}
+		$this->session->user_id = $this->id;
+		$this->session->firstname = $this->firstname;
+		return true;
+	}
+
+	public function getRegisterForm($isPost = false, $errors = array()) {
+
+		$form = new Form('', 'form-register', ROOT_HTTP.'user/register', 'POST', 'form-horizontal', $errors, $isPost);
+		$form->addField('firstname', Lang::_('Firstname'), 'text', $this->firstname, true, '', @$errors['firstname']);
+		$form->addField('lastname', Lang::_('Lastname'), 'text', $this->lastname, true, '', @$errors['lastname']);
+		$form->addField('email', Lang::_('Email'), 'email', $this->email, true, '', @$errors['email']);
+		$form->addField('confirm_email', Lang::_('Confirm email'), 'email', '', true, '', @$errors['confirm_email']);
+		$form->addField('password', Lang::_('Password'), 'password', '', true, '', @$errors['password']);
+		$form->addField('confirm_password', Lang::_('Confirm password'), 'password', '', true, '', @$errors['confirm_password']);
+		$form->addField('newsletter', Lang::_('Newsletter'), 'checkbox', $this->newsletter, false, '');
+		$form->addField('cgu', Lang::_('Accept the CGU'), 'checkbox', $this->cgu, true, '', @$errors['cgu']);
+
+		return $form;
 	}
 
 	public function register() {
