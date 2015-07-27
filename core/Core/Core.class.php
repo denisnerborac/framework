@@ -33,7 +33,7 @@ abstract class Core {
 		return true;
 	}
 
-	protected static function getDbTable() {
+	public static function getDbTable() {
 		return strtolower(self::getClass());
 	}
 
@@ -41,12 +41,19 @@ abstract class Core {
 		return ucfirst(get_called_class());
 	}
 
-	protected function getVars() {
-		return get_object_vars($this);
+	public function getVars() {
+		$class = new ReflectionClass($this);
+		$properties = $class->getProperties(ReflectionProperty::IS_PROTECTED);
+		$vars = array();
+		foreach ($properties as $property) {
+		    $vars[$property->getName()] = '';
+		}
+		return $vars;
 	}
 
-	protected function getDbFields() {
+	public function getDbFields() {
 		$vars = $this->getVars();
+
 		unset($vars['table']);
 
 		$fields = array();
@@ -67,14 +74,14 @@ abstract class Core {
 	}
 
 	public function __call($method, $arguments) {
-		self::_undefinedMethod('Non-static');
+		self::_undefinedMethod('Non-static', $method, $arguments);
 	}
 
 	public function __call_static($method, $arguments) {
-		self::_undefinedMethod('Static');
+		self::_undefinedMethod('Static', $method, $arguments);
 	}
 
-	private function _undefinedMethod($type) {
+	private function _undefinedMethod($type, $method, $arguments) {
 		throw new Exception($type.' '.$method.' does not exists in class '.self::getClass().' called with arguments : '.var_dump($arguments, true));
 	}
 

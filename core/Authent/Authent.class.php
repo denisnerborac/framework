@@ -5,6 +5,23 @@ class Authent {
 	const REMEMBER_ME_SECRET_KEY = 'ImNH7OI%$n7E$pi?8ZHB3ugOB3t*gx&I';
 	const REMEMBER_ME_EXPIRATION = 604800; // 60 * 60 * 24 * 7 = 7 jours
 
+	public static function logout() {
+		// On détruit toutes les variables dans $_SESSION
+		session_unset();
+
+		// On détruit la session côté serveur
+		session_destroy();
+
+		// On détruit le cookie de session côté client
+		setcookie(session_name(), false, 1, '/');
+
+		// On détruit les cookies du remember me
+		setcookie('rememberme_data', false, 1);
+		setcookie('rememberme_token', false, 1);
+
+		return true;
+	}
+
 	public static function setRememberMe($user_id, $expiration = self::REMEMBER_ME_EXPIRATION) {
 
 		$protocol = $_SERVER['REQUEST_SCHEME']; // Contient le protocole en cours http ou https
