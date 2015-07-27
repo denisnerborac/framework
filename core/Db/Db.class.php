@@ -64,9 +64,6 @@ class Db extends PDO {
 	}
 
 	public static function insert($sql, $vars = array()) {
-
-		print_r($vars);
-
 		$query = self::_query($sql, $vars);
 		return self::getInstance()->lastInsertId();
 	}
