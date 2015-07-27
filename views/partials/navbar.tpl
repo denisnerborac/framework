@@ -12,7 +12,7 @@
 					<a href="{$HTTP_ROOT}logout" class="blog-nav-item{if $current_page == 'user/logout/'} active{/if}">{t}Logout{/t}</a>&nbsp;|&nbsp;
 				{else}
 					<a href="{$HTTP_ROOT}login" class="blog-nav-item{if $current_page == 'user/login/'} active{/if}">{t}Login{/t}</a>
-					<a href="{$HTTP_ROOT}register" class="blog-nav-item{if $current_page == 'user/register/'} active{/if}">{t}Register{/t}</a>&nbsp;|&nbsp
+					<a href="{$HTTP_ROOT}register" class="blog-nav-item{if $current_page == 'user/register/'} active{/if}">{t}Register{/t}</a>&nbsp;|&nbsp;
 				{/if}
 
 				<a href="{$HTTP_ROOT}../fr/{$current_page}{$querystring}" class="blog-nav-item{if $lang == 'fr'} active{/if}">FR</a>
