@@ -1,9 +1,9 @@
 <?php
 abstract class BaseAdminController extends BaseController {
 
-	public function __construct($controller) {
+	public function __construct() {
 
-		parent::__construct($controller);
+		parent::__construct();
 
 		$vars['website_title'] = 'Backoffice';
 		$vars['website_description'] = 'Admin Description';
