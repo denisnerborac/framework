@@ -8,6 +8,8 @@ class Session {
 	protected $_session_id = 0;
 	protected $_session = array();
 
+	private static $instance;
+
 	public function __construct($name = null) {
 
 		$this->_name = $name ?: $this->_name;
@@ -20,6 +22,13 @@ class Session {
 		$this->_clean();
 
 		return true;
+	}
+
+	public static function getInstance($name = null) {
+		if(!isset(self::$instance)) {
+			self::$instance = new Session($name);
+		}
+		return self::$instance;
 	}
 
 	public function __set($key, $value) {
