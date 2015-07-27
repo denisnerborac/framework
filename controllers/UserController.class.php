@@ -34,7 +34,7 @@ class UserController extends BaseController {
 			}
 
 			if ($success === false) {
-				$errors['authent'] = 'Identifiants incorrects';
+				$errors['authent'] = true;
 			}
 		}
 
@@ -72,17 +72,17 @@ class UserController extends BaseController {
 			}
 
 			if (empty($confirm_email) || strcmp($user->email, $confirm_email) !== 0) {
-				$errors['confirm_email'] = 'Vous devez confirmer votre email';
+				$errors['confirm_email'] = Lang::_('You must confirm your email');
 			}
 			if (empty($confirm_password) || strcmp($user->password, $confirm_password) !== 0) {
-				$errors['confirm_password'] = 'Vous devez confirmer votre mot de passe';
+				$errors['confirm_password'] = Lang::_('You must confirm your password');
 			}
 
 			if (empty($errors)) {
 
 				$user_already_exists = $user->checkAlreadyExists();
 				if ($user_already_exists === true) {
-					$errors['email'] = "L'email est déjà pris";
+					$errors['email'] = Lang::_('Email already in use');
 				} else {
 
 					$user->password = password_hash($user->password, PASSWORD_BCRYPT);
@@ -92,7 +92,7 @@ class UserController extends BaseController {
 					if (!empty($user_id)) {
 						$success = $this->login();
 					} else {
-						$errors['register'] = 'Register failed';
+						$errors['register'] = Lang::_('Register failed');
 					}
 				}
 			}
