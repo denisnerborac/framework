@@ -22,7 +22,7 @@ abstract class Controller {
 		$this->setParams();
 	}
 
-	protected function setParams($session = null) {
+	protected function setParams() {
 
 		global $routes;
 
@@ -64,7 +64,7 @@ abstract class Controller {
 			$this->get = Utils::stripslashes($this->get);
 		}
 
-		$this->session = $session;
+		$this->session = !SESSION_DISABLED ? Session::getInstance(SESSION_DEFAULT_NAME) : null;;
 	}
 
 	public function getParam($param, $default = null) {

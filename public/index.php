@@ -3,13 +3,11 @@ try {
 
 	require_once '../config/core.conf.php';
 
-	$session = !SESSION_DISABLED ? new Session(SESSION_DEFAULT_NAME) : null;
-
 	header('Content-type: text/html; charset='.Lang::$encoding);
 
 	//$profiler = new Profiler();
 
-	$controller = new ActionController($session);
+	$controller = new ActionController();
 	$controller->handle();
 
 	//$profiler->stop();
