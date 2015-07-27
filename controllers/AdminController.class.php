@@ -25,7 +25,7 @@ class AdminController extends BaseAdminController {
 
 		$vars = array(
 			'posts' => $posts,
-			'table' => $table->get()
+			'table' => $table->render()
 		);
 
 		$this->render('admin/post', $vars);
@@ -39,7 +39,7 @@ class AdminController extends BaseAdminController {
 
 		$vars = array(
 			'contacts' => $contacts,
-			'table' => $table->get()
+			'table' => $table->render()
 		);
 
 		$this->render('admin/contact', $vars);
@@ -49,7 +49,7 @@ class AdminController extends BaseAdminController {
 
 		$id = $this->getParam(0, 0);
 
-		$isPost = $this->controller->request->isPost();
+		$isPost = $this->request->isPost();
 		$errors = array();
 
 		$contact = new Contact();

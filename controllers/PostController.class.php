@@ -20,7 +20,7 @@ class PostController extends BaseController {
 			'post' => $post
 		);
 
-		$this->controller->response->render('post', $vars);
+		$this->render('post', $vars);
 	}
 
 	public function archives() {

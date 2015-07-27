@@ -8,16 +8,9 @@ class SearchController extends BaseController {
 
 	public function results() {
 
-		/*
-		$q = $this->controller->request->get('q', '');
-		if (!empty($q)) {
-			$this->controller->response->redirect($this->controller->getUri().Utils::cleanString($q), true);
-		}
-		*/
-
 		$params = $this->getParams();
 
-		$search_query = $this->controller->request->get('q', '');
+		$search_query = $this->request->get('q', '');
 		$page = !empty($params[0]) ? (int) $params[0] : 1;
 
 		$vars = array(

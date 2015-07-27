@@ -9,7 +9,7 @@ class ContactController extends BaseController {
 			'description' => '...'
 		);
 
-		$isPost = $this->controller->request->isPost();
+		$isPost = $this->request->isPost();
 
 		$contact = new Contact();
 
@@ -18,7 +18,7 @@ class ContactController extends BaseController {
 
 			foreach($contact->getFields() as $key => $value) {
 				try {
-					$contact->$key = $this->controller->request->post($key, '');
+					$contact->$key = $this->request->post($key, '');
 				} catch (Exception $e) {
 					$errors[$key] = $e->getMessage();
 				}

@@ -15,6 +15,6 @@ abstract class BaseAdminController extends BaseController {
             'admin/contact/' => array('Contacts', 'fa-envelope')
 		);
 
-		$this->controller->response->addVars($vars);
+		$this->response->addVars($vars);
 	}
 }
