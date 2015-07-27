@@ -31,7 +31,7 @@ define('JS_HTTP', STATICS_HTTP.'js/');
 define('IMG_HTTP', STATICS_HTTP.'img/');
 
 // CONTROLLERS
-define('DEFAULT_CONTROLLER_TARGET', 'default');
+define('DEFAULT_CONTROLLER_TARGET', 'home');
 define('DEFAULT_CONTROLLER_ACTION', 'index');
 
 // TEMPLATES/SMARTY
