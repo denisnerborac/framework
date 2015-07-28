@@ -34,11 +34,11 @@ class UserController extends BaseController {
 			}
 
 			if ($success === false) {
-				$errors['authent'] = true;
+				$errors['authent'] = Lang::_('Authent failed');
 			}
 		}
 
-		$form = $user->getLoginForm($isPost, $errors);
+		$form = $user->getLoginForm(ROOT_HTTP.$this->lang->getUserLang().'/user/login', $isPost, $errors);
 
 		$vars = array(
 			'title' => Lang::_('Login'),
@@ -121,7 +121,7 @@ class UserController extends BaseController {
 				}
 			}
 
-			$form = $user->getRegisterForm($isPost, $errors);
+			$form = $user->getRegisterForm(ROOT_HTTP.$this->lang->getUserLang().'/user/register', $isPost, $errors);
 
 			$vars = array(
 				'title' => Lang::_('Register'),

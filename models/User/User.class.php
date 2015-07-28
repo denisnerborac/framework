@@ -61,25 +61,25 @@ class User extends Model {
 	}
 	public function setFirstname($firstname) {
 		if (empty($firstname)) {
-			throw new Exception('Vous devez renseigner votre prénom');
+			throw new Exception(Lang::_('You must fill your firstname'));
 		}
 		$this->firstname = $firstname;
 	}
 	public function setLastname($lastname) {
 		if (empty($lastname)) {
-			throw new Exception('Vous devez renseigner votre nom');
+			throw new Exception(Lang::_('You must fill your lastname'));
 		}
 		$this->lastname = $lastname;
 	}
 	public function setEmail($email) {
 		if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-			throw new Exception('Vous devez renseigner un email valide');
+			throw new Exception(Lang::_('You must provide a valid email'));
 		}
 		$this->email = $email;
 	}
 	public function setPassword($password) {
 		if (strlen($password) < 6) {
-			throw new Exception('Vous devez fournir un mot de passe de 6 caractères minimum');
+			throw new Exception(Lang::_('You must profide a password with at least 6 chars'));
 		}
 		$this->password = $password;
 	}
@@ -91,7 +91,7 @@ class User extends Model {
 	}
 	public function setCgu($cgu) {
 		if (empty($cgu)) {
-			throw new Exception('Vous devez accepter les CGU');
+			throw new Exception(Lang::_('You have to accept the terms of service'));
 		}
 		$this->cgu = $cgu;
 	}
@@ -156,11 +156,11 @@ class User extends Model {
 		return false;
 	}
 
-	public function getLoginForm($isPost = false, $errors = array()) {
+	public function getLoginForm($action, $isPost = false, $errors = array()) {
 
-		$form = new Form('', 'form-login', ROOT_HTTP.'user/login', 'POST', 'form-horizontal', $errors, $isPost);
-		$form->addField('email', Lang::_('Email'), 'email', $this->email, true, '', @$errors['authent']);
-		$form->addField('password', Lang::_('Password'), 'password', $this->password, true, '', @$errors['authent']);
+		$form = new Form('', 'form-login', $action, 'POST', 'form-horizontal', $errors, $isPost);
+		$form->addField('email', Lang::_('Email'), 'email', $this->email, true, '', !empty($errors['authent']) ? true : false);
+		$form->addField('password', Lang::_('Password'), 'password', $this->password, true, '', !empty($errors['authent']) ? true : false);
 		$form->addField('remember_me', Lang::_('Remember me'), 'checkbox', '', false, '');
 
 		return $form;
@@ -175,17 +175,17 @@ class User extends Model {
 		return true;
 	}
 
-	public function getRegisterForm($isPost = false, $errors = array()) {
+	public function getRegisterForm($action, $isPost = false, $errors = array()) {
 
-		$form = new Form('', 'form-register', ROOT_HTTP.'user/register', 'POST', 'form-horizontal', $errors, $isPost);
+		$form = new Form('', 'form-register', $action, 'POST', 'form-horizontal', $errors, $isPost);
 		$form->addField('firstname', Lang::_('Firstname'), 'text', $this->firstname, true, '', @$errors['firstname']);
 		$form->addField('lastname', Lang::_('Lastname'), 'text', $this->lastname, true, '', @$errors['lastname']);
 		$form->addField('email', Lang::_('Email'), 'email', $this->email, true, '', @$errors['email']);
 		$form->addField('confirm_email', Lang::_('Confirm email'), 'email', '', true, '', @$errors['confirm_email']);
 		$form->addField('password', Lang::_('Password'), 'password', $this->password, true, '', @$errors['password']);
 		$form->addField('confirm_password', Lang::_('Confirm password'), 'password', '', true, '', @$errors['confirm_password']);
-		$form->addField('newsletter', Lang::_('Newsletter'), 'checkbox', $this->newsletter, false, '');
-		$form->addField('cgu', Lang::_('Accept the CGU'), 'checkbox', $this->cgu, true, '', @$errors['cgu']);
+		$form->addField('newsletter', Lang::_('Subscribe to the newsletter'), 'checkbox', $this->newsletter, false, '');
+		$form->addField('cgu', Lang::_('Accept the terms of service'), 'checkbox', $this->cgu, true, '', @$errors['cgu']);
 
 		return $form;
 	}
