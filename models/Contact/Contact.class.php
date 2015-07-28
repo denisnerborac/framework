@@ -70,15 +70,15 @@ class Contact extends Model {
 		$this->cgu = $cgu;
 	}
 
-	public function getForm($action, $request, $isPost = false, $errors = array()) {
+	public function getForm($type, $action, $request, $isPost = false, $errors = array()) {
 
 		$form = new Form($id = 'form-contact', $name = 'form-contact', $action, 'POST', 'form-horizontal', $isPost);
-		$form->addField('lastname', Lang::_('Lastname'), 'text', $request->post('lastname'), true, '', @$errors['lastname']);
-		$form->addField('firstname', Lang::_('Firstname'), 'text', $request->post('firstname'), true, '', @$errors['firstname']);
-		$form->addField('email', Lang::_('Email'), 'email', $request->post('email'), true, '', @$errors['email']);
-		$form->addField('message', Lang::_('Message'), 'textarea', $request->post('message'), true, '', @$errors['message']);
-		$form->addField('newsletter', Lang::_('Subscribe to the newsletter'), 'checkbox', $this->newsletter, false);
-		$form->addField('cgu', Lang::_('Accept the terms of service'), 'checkbox', $request->post('cgu'), true, '', @$errors['cgu']);
+		$form->addField('lastname', Lang::_('Lastname'), 'text', $this->_getfieldvalue('lastname', $type, $request), true, '', @$errors['lastname']);
+		$form->addField('firstname', Lang::_('Firstname'), 'text', $this->_getfieldvalue('firstname', $type, $request), true, '', @$errors['firstname']);
+		$form->addField('email', Lang::_('Email'), 'email', $this->_getfieldvalue('email', $type, $request), true, '', @$errors['email']);
+		$form->addField('message', Lang::_('Message'), 'textarea', $this->_getfieldvalue('message', $type, $request), true, '', @$errors['message']);
+		$form->addField('newsletter', Lang::_('Subscribe to the newsletter'), 'checkbox', $this->_getfieldvalue('newsletter', $type, $request), false);
+		$form->addField('cgu', Lang::_('Accept the terms of service'), 'checkbox', $this->_getfieldvalue('cgu', $type, $request), true, '', @$errors['cgu']);
 
 		return $form->render();
 	}
