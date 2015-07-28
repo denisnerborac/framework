@@ -38,7 +38,7 @@ class UserController extends BaseController {
 			}
 		}
 
-		$form = $user->getLoginForm(ROOT_HTTP.$this->lang->getUserLang().'/user/login', $isPost, $errors);
+		$form = $user->getLoginForm(ROOT_HTTP.$this->lang->getUserLang().'/user/login', $this->request, $isPost, $errors);
 
 		$vars = array(
 			'title' => Lang::_('Login'),
@@ -121,7 +121,7 @@ class UserController extends BaseController {
 				}
 			}
 
-			$form = $user->getRegisterForm(ROOT_HTTP.$this->lang->getUserLang().'/user/register', $isPost, $errors);
+			$form = $user->getRegisterForm(ROOT_HTTP.$this->lang->getUserLang().'/user/register', $this->request, $isPost, $errors);
 
 			$vars = array(
 				'title' => Lang::_('Register'),

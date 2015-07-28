@@ -156,12 +156,12 @@ class User extends Model {
 		return false;
 	}
 
-	public function getLoginForm($action, $isPost = false, $errors = array()) {
+	public function getLoginForm($action, $request, $isPost = false, $errors = array()) {
 
 		$form = new Form('', 'form-login', $action, 'POST', 'form-horizontal', $errors, $isPost);
-		$form->addField('email', Lang::_('Email'), 'email', $this->email, true, '', !empty($errors['authent']) ? true : false);
-		$form->addField('password', Lang::_('Password'), 'password', $this->password, true, '', !empty($errors['authent']) ? true : false);
-		$form->addField('remember_me', Lang::_('Remember me'), 'checkbox', '', false, '');
+		$form->addField('email', Lang::_('Email'), 'email', $request->post('email'), true, '', !empty($errors['authent']) ? true : false);
+		$form->addField('password', Lang::_('Password'), 'password', '', true, '', !empty($errors['authent']) ? true : false);
+		$form->addField('remember_me', Lang::_('Remember me'), 'checkbox', $request->post('remember_me'), false, '');
 
 		return $form;
 	}
@@ -175,17 +175,17 @@ class User extends Model {
 		return true;
 	}
 
-	public function getRegisterForm($action, $isPost = false, $errors = array()) {
+	public function getRegisterForm($action, $request, $isPost = false, $errors = array()) {
 
 		$form = new Form('', 'form-register', $action, 'POST', 'form-horizontal', $errors, $isPost);
-		$form->addField('firstname', Lang::_('Firstname'), 'text', $this->firstname, true, '', @$errors['firstname']);
-		$form->addField('lastname', Lang::_('Lastname'), 'text', $this->lastname, true, '', @$errors['lastname']);
-		$form->addField('email', Lang::_('Email'), 'email', $this->email, true, '', @$errors['email']);
-		$form->addField('confirm_email', Lang::_('Confirm email'), 'email', '', true, '', @$errors['confirm_email']);
-		$form->addField('password', Lang::_('Password'), 'password', $this->password, true, '', @$errors['password']);
+		$form->addField('firstname', Lang::_('Firstname'), 'text', $request->post('firstname'), true, '', @$errors['firstname']);
+		$form->addField('lastname', Lang::_('Lastname'), 'text', $request->post('lastname'), true, '', @$errors['lastname']);
+		$form->addField('email', Lang::_('Email'), 'email', $request->post('email'), true, '', @$errors['email']);
+		$form->addField('confirm_email', Lang::_('Confirm email'), 'email', $request->post('confirm_email'), true, '', @$errors['confirm_email']);
+		$form->addField('password', Lang::_('Password'), 'password', '', true, '', @$errors['password']);
 		$form->addField('confirm_password', Lang::_('Confirm password'), 'password', '', true, '', @$errors['confirm_password']);
-		$form->addField('newsletter', Lang::_('Subscribe to the newsletter'), 'checkbox', $this->newsletter, false, '');
-		$form->addField('cgu', Lang::_('Accept the terms of service'), 'checkbox', $this->cgu, true, '', @$errors['cgu']);
+		$form->addField('newsletter', Lang::_('Subscribe to the newsletter'), 'checkbox', $request->post('newsletter'), false, '');
+		$form->addField('cgu', Lang::_('Accept the terms of service'), 'checkbox', $request->post('cgu'), true, '', @$errors['cgu']);
 
 		return $form;
 	}
