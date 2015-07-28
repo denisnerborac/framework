@@ -30,7 +30,7 @@ class ContactController extends BaseController {
 			}
 		}
 
-		$form = $contact->getForm(ROOT_HTTP.$this->lang->getUserLang().'/contact/post', $isPost, $errors);
+		$form = $contact->getForm(ROOT_HTTP.$this->lang->getUserLang().'/contact/post', $this->request, $isPost, $errors);
 
 		$vars['form'] = $form;
 		$vars['isPost'] = $isPost;

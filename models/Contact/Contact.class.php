@@ -70,15 +70,15 @@ class Contact extends Model {
 		$this->cgu = $cgu;
 	}
 
-	public function getForm($action, $isPost = false, $errors = array()) {
+	public function getForm($action, $request, $isPost = false, $errors = array()) {
 
 		$form = new Form($id = 'form-contact', $name = 'form-contact', $action, 'POST', 'form-horizontal', $isPost);
-		$form->addField('lastname', Lang::_('Lastname'), 'text', $this->lastname, true, '', @$errors['lastname']);
-		$form->addField('firstname', Lang::_('Firstname'), 'text', $this->firstname, true, '', @$errors['firstname']);
-		$form->addField('email', Lang::_('Email'), 'email', $this->email, true, '', @$errors['email']);
-		$form->addField('message', Lang::_('Message'), 'textarea', $this->message, true, '', @$errors['message']);
+		$form->addField('lastname', Lang::_('Lastname'), 'text', $request->post('lastname'), true, '', @$errors['lastname']);
+		$form->addField('firstname', Lang::_('Firstname'), 'text', $request->post('firstname'), true, '', @$errors['firstname']);
+		$form->addField('email', Lang::_('Email'), 'email', $request->post('email'), true, '', @$errors['email']);
+		$form->addField('message', Lang::_('Message'), 'textarea', $request->post('message'), true, '', @$errors['message']);
 		$form->addField('newsletter', Lang::_('Subscribe to the newsletter'), 'checkbox', $this->newsletter, false);
-		$form->addField('cgu', Lang::_('Accept the terms of service'), 'checkbox', $this->cgu, true, '', @$errors['cgu']);
+		$form->addField('cgu', Lang::_('Accept the terms of service'), 'checkbox', $request->post('cgu'), true, '', @$errors['cgu']);
 
 		return $form->render();
 	}
