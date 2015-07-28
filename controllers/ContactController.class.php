@@ -14,6 +14,7 @@ class ContactController extends BaseController {
 		$contact = new Contact();
 
 		$errors = array();
+		$success = false;
 		if ($isPost) {
 
 			foreach($contact->getFields() as $key => $value) {
@@ -25,18 +26,16 @@ class ContactController extends BaseController {
 			}
 
 			if (empty($errors)) {
-
-				if ($result = $contact->insert()) {
-					$vars['redirectJS'] = Utils::redirectJS(ROOT_HTTP, 3);
-					$this->render('contact', $vars);
-					return true;
-				}
+				$success = $result = $contact->insert();
 			}
 		}
 
-		$form = $contact->getForm($id = 'form-contact', $name = 'form-contact', $action = ROOT_HTTP.'contact/post', 'POST', 'form-horizontal', $errors, $isPost);
+		$form = $contact->getForm(ROOT_HTTP.$this->lang->getUserLang().'/contact/post', $isPost, $errors);
 
 		$vars['form'] = $form;
+		$vars['isPost'] = $isPost;
+		$vars['errors'] = $errors;
+		$vars['success'] = $success;
 
 		$this->render('contact', $vars);
 	}

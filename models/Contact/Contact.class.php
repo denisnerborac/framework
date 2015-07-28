@@ -9,19 +9,6 @@ class Contact extends Model {
 	protected $newsletter;
 	protected $cgu;
 
-	public function getForm($id = '', $name = '', $action = '', $method = 'POST', $class = 'form-horizontal', $errors = array(), $isPost = false) {
-
-		$form = new Form($id, $name, $action, $method, $class, $isPost);
-		$form->addField('lastname', Lang::_('Lastname'), 'text', $this->lastname, true, '', @$errors['lastname']);
-		$form->addField('firstname', Lang::_('Firstname'), 'text', $this->firstname, true, '', @$errors['firstname']);
-		$form->addField('email', Lang::_('Email'), 'email', $this->email, true, '', @$errors['email']);
-		$form->addField('message', Lang::_('Message'), 'textarea', $this->message, true, '', @$errors['message']);
-		$form->addField('newsletter', Lang::_('Subscribe to the newsletter'), 'checkbox', $this->newsletter, false);
-		$form->addField('cgu', Lang::_('Accept the CGU'), 'checkbox', $this->cgu, true, '', @$errors['cgu']);
-
-		return $form->render();
-	}
-
 	/* Getters */
 	public function getId() {
 		return $this->id;
@@ -63,13 +50,13 @@ class Contact extends Model {
 	}
 	public function setEmail($email) {
 		if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-			throw new Exception(Lang::_('You must fill a valid email'));
+			throw new Exception(Lang::_('You must provide a valid email'));
 		}
 		$this->email = $email;
 	}
 	public function setMessage($message) {
 		if (empty($message)) {
-			throw new Exception(Lang::_('You must fill the message'));
+			throw new Exception(Lang::_('You must fill your message'));
 		}
 		$this->message = strip_tags($message);
 	}
@@ -78,9 +65,22 @@ class Contact extends Model {
 	}
 	public function setCgu($cgu) {
 		if (empty($cgu)) {
-			throw new Exception(Lang::_('You have to accept the ToS'));
+			throw new Exception(Lang::_('You have to accept the terms of service'));
 		}
 		$this->cgu = $cgu;
+	}
+
+	public function getForm($action, $isPost = false, $errors = array()) {
+
+		$form = new Form($id = 'form-contact', $name = 'form-contact', $action, 'POST', 'form-horizontal', $isPost);
+		$form->addField('lastname', Lang::_('Lastname'), 'text', $this->lastname, true, '', @$errors['lastname']);
+		$form->addField('firstname', Lang::_('Firstname'), 'text', $this->firstname, true, '', @$errors['firstname']);
+		$form->addField('email', Lang::_('Email'), 'email', $this->email, true, '', @$errors['email']);
+		$form->addField('message', Lang::_('Message'), 'textarea', $this->message, true, '', @$errors['message']);
+		$form->addField('newsletter', Lang::_('Subscribe to the newsletter'), 'checkbox', $this->newsletter, false);
+		$form->addField('cgu', Lang::_('Accept the terms of service'), 'checkbox', $this->cgu, true, '', @$errors['cgu']);
+
+		return $form->render();
 	}
 
 	public function insert() {

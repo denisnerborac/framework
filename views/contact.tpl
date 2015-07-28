@@ -7,15 +7,17 @@
 
 		<div class="row">
 
-			{if isset($form)}
-			{$form}
+			{if !empty($errors)}
+			<div class="alert alert-danger" role="danger">{t}Please fix the following errors{/t}</div>
 			{/if}
 
-			{if isset($redirectJS)}
-			<div class="alert alert-success" role="alert">
-			{t}Your message was sent succesfully, you will be redirected in 3 seconds...{/t}
-			</div>
-			{$redirectJS}
+			{if !empty($isPost) && !empty($success)}
+				<div class="alert alert-success" role="success">{t}Your message was sent succesfully, you will be redirected in 3 seconds...{/t}</div>
+				{Utils::redirectJS($HTTP_ROOT, 3)}
+			{/if}
+
+			{if isset($form) && empty($success)}
+				{$form}
 			{/if}
 
 		</div><!-- /.row -->
