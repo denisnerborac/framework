@@ -33,7 +33,7 @@ class PostController extends BaseController {
 		$time = strtotime($date);
 		$date_label = ucfirst(Lang::_(strtolower(date('F', $time)))).' '.date('Y', $time);
 
-		$pagination = new Pagination('SELECT * FROM posts WHERE DATE_FORMAT(date, "%Y-%m") = :date ORDER BY date DESC', array(':date' => $date), 4, $page - 1);
+		$pagination = new Pagination('SELECT * FROM post WHERE DATE_FORMAT(date, "%Y-%m") = :date ORDER BY date DESC', array(':date' => $date), 4, $page - 1);
 
 		/*
 		// Same with date split without mysql function DATE_FORMAT()
@@ -41,7 +41,7 @@ class PostController extends BaseController {
 		$year = $date_parts[0];
 		$month = $date_parts[1];
 
-		$pagination = new Pagination('SELECT * FROM posts WHERE YEAR(date) = :year AND MONTH(date) = :month ORDER BY date DESC', array(':year' => $year, ':month' => $month), 4, $page - 1);
+		$pagination = new Pagination('SELECT * FROM post WHERE YEAR(date) = :year AND MONTH(date) = :month ORDER BY date DESC', array(':year' => $year, ':month' => $month), 4, $page - 1);
 		*/
 
 		$vars = array(

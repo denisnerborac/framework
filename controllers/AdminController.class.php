@@ -19,7 +19,7 @@ class AdminController extends BaseAdminController {
 
 	public function post() {
 
-		$posts = Post::getList('SELECT * FROM posts ORDER BY title ASC');
+		$posts = Post::getList('SELECT * FROM post ORDER BY title ASC');
 
 		$table = new Table('data-table', 'post', $posts, array('id', 'title', 'author', 'date'), ROOT_HTTP.'admin/post/edit', ROOT_HTTP.'admin/post/delete');
 

@@ -25,7 +25,7 @@ class SearchController extends BaseController {
 
 		if (!empty($search_query)) {
 
-			$pagination = new Pagination('SELECT * FROM posts WHERE title LIKE :search OR content LIKE :search ORDER BY date DESC', array(':search' => '%'.$search_query.'%'), 5, $page - 1);
+			$pagination = new Pagination('SELECT * FROM post WHERE title LIKE :search OR content LIKE :search ORDER BY date DESC', array(':search' => '%'.$search_query.'%'), 5, $page - 1);
 
 			$vars = array_merge($vars, array(
 				'page' => $page,
