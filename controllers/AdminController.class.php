@@ -31,6 +31,37 @@ class AdminController extends BaseAdminController {
 		$this->render('admin/post', $vars);
 	}
 
+	public function post_insert() {
+		return $this->post_edit();
+	}
+	public function post_update() {
+		return $this->post_edit();
+	}
+	public function post_edit() {
+
+		$id = $this->getParam(0, 0);
+		$type = !empty($id) ? 'update' : 'insert';
+		$action = ROOT_HTTP.'admin/post/'.$type.(!empty($id) ? '/'.$id : '');
+
+		$isPost = $this->request->isPost();
+		$errors = array();
+
+		$post = new Post();
+		if (!empty($id)) {
+			$post = Post::get($id);
+			if (empty($post)) {
+				throw new Exception('Undefined post with id = ['.$id.']');
+			}
+		}
+
+		$form = $post->getForm($type, $action, $this->request, $isPost, $errors = array());
+
+		$vars['form'] = $form;
+
+		$this->render('admin/post', $vars);
+	}
+
+
 	public function contact() {
 
 		$contacts = Contact::getList('SELECT * FROM contact ORDER BY lastname, firstname');
@@ -48,6 +79,8 @@ class AdminController extends BaseAdminController {
 	public function contact_edit() {
 
 		$id = $this->getParam(0, 0);
+		$type = !empty($id) ? 'update' : 'insert';
+		$action = ROOT_HTTP.'admin/contact/'.$type.(!empty($id) ? '/'.$id: '');
 
 		$isPost = $this->request->isPost();
 		$errors = array();
@@ -60,8 +93,7 @@ class AdminController extends BaseAdminController {
 			}
 		}
 
-		// $id, $name, $action, $method, $class, $errors, $isPost
-		$form = $contact->getForm('form-contact-admin', 'form-contact-admin', ROOT_HTTP.'admin/contact', 'POST', 'form-horizontal', $errors, $isPost);
+		$form = $contact->getForm($type, $action, $this->request, $isPost, $errors);
 
 		$vars['form'] = $form;
 

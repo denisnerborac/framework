@@ -3,7 +3,9 @@
 global $routes;
 
 $routes = array(
-	/* Front */
+
+	#### Front ####
+
 	'/' => array(
 		'target' => DEFAULT_CONTROLLER_TARGET,
 		'action' => DEFAULT_CONTROLLER_ACTION
@@ -34,7 +36,17 @@ $routes = array(
 	),
 
 
-	/* Backoffice */
+	##### Backoffice ####
+
+	/* Contact */
+	'admin/contact/create' => array(
+		'target' => 'admin',
+		'action' => 'contact_edit'
+	),
+	'admin/contact/update/([0-9\-]+)' => array(
+		'target' => 'admin',
+		'action' => 'contact_edit'
+	),
 	'admin/contact/edit/([0-9\-]+)' => array(
 		'target' => 'admin',
 		'action' => 'contact_edit'
@@ -42,5 +54,23 @@ $routes = array(
 	'admin/contact/delete/([0-9\-]+)' => array(
 		'target' => 'admin',
 		'action' => 'contact_delete'
+	),
+
+	/* Post */
+	'admin/post/create' => array(
+		'target' => 'admin',
+		'action' => 'post_create'
+	),
+	'admin/post/update/([0-9\-]+)' => array(
+		'target' => 'admin',
+		'action' => 'post_update'
+	),
+	'admin/post/edit/([0-9\-]+)' => array(
+		'target' => 'admin',
+		'action' => 'post_edit'
+	),
+	'admin/post/delete/([0-9\-]+)' => array(
+		'target' => 'admin',
+		'action' => 'post_delete'
 	)
 );
