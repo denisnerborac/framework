@@ -51,25 +51,25 @@ class Contact extends Model {
 	}
 	public function setLastname($lastname) {
 		if (empty($lastname)) {
-			throw new Exception(Lang::_('Vous devez renseigner votre nom'));
+			throw new Exception(Lang::_('You must fill your lastname'));
 		}
 		$this->lastname = $lastname;
 	}
 	public function setFirstname($firstname) {
 		if (empty($firstname)) {
-			throw new Exception(Lang::_('Vous devez renseigner votre prénom'));
+			throw new Exception(Lang::_('You must fill your firstname'));
 		}
 		$this->firstname = $firstname;
 	}
 	public function setEmail($email) {
 		if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-			throw new Exception(Lang::_('Vous devez renseigner un email valide'));
+			throw new Exception(Lang::_('You must fill a valid email'));
 		}
 		$this->email = $email;
 	}
 	public function setMessage($message) {
 		if (empty($message)) {
-			throw new Exception(Lang::_('Vous devez renseigner votre message'));
+			throw new Exception(Lang::_('You must fill the message'));
 		}
 		$this->message = strip_tags($message);
 	}
@@ -78,7 +78,7 @@ class Contact extends Model {
 	}
 	public function setCgu($cgu) {
 		if (empty($cgu)) {
-			throw new Exception(Lang::_('Vous devez accepter les conditions d\'utilisations'));
+			throw new Exception(Lang::_('You have to accept the ToS'));
 		}
 		$this->cgu = $cgu;
 	}

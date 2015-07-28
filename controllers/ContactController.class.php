@@ -16,7 +16,7 @@ class ContactController extends BaseController {
 		$errors = array();
 		if ($isPost) {
 
-			foreach($contact->getDbFields() as $key => $value) {
+			foreach($contact->getFields() as $key => $value) {
 				try {
 					$contact->$key = $this->request->post($key, '');
 				} catch (Exception $e) {

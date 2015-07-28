@@ -41,72 +41,99 @@ class UserController extends BaseController {
 		$form = $user->getLoginForm($isPost, $errors);
 
 		$vars = array(
-			'title' => 'Login',
+			'title' => Lang::_('Login'),
 			'isPost' => $isPost,
 			'form' => $form,
 			'errors' => $errors,
 			'success' => $success
 		);
+
+		$fb_active = API_Facebook::isActive();
+		if ($fb_active) {
+			$vars['fb_login_url'] = API_Facebook::getLoginUrl(ROOT_HTTP.'register');
+		}
 
 		return $this->render('authent', $vars);
 	}
 
 	public function register() {
 
-		$user = new User();
+		try {
 
-		$errors = array();
-		$success = false;
-		$isPost = $this->request->isPost();
+			$errors = array();
+			$success = false;
+			$isPost = $this->request->isPost();
 
-		$confirm_email = $this->request->post('confirm_email', '');
-		$confirm_password = $this->request->post('confirm_password', '');
+			$user = new User();
 
-		if ($isPost) {
-			foreach($user->getDbFields() as $key => $value) {
-				try {
-					$user->$key = $this->request->post($key, '');
-				} catch (Exception $e) {
-					$errors[$key] = $e->getMessage();
+			try {
+
+				$fb_active = API_Facebook::isActive();
+
+				if ($fb_active) {
+
+					$fb_user = $user->getFacebookUser(ROOT_HTTP.'register');
+
+					if (!empty($fb_user)) {
+						$this->response->redirect(ROOT_HTTP);
+					}
 				}
+			} catch (Exception $e) {
+				$errors['authent'] = $e->getMessage();
 			}
 
-			if (empty($confirm_email) || strcmp($user->email, $confirm_email) !== 0) {
-				$errors['confirm_email'] = Lang::_('You must confirm your email');
-			}
-			if (empty($confirm_password) || strcmp($user->password, $confirm_password) !== 0) {
-				$errors['confirm_password'] = Lang::_('You must confirm your password');
-			}
+			$confirm_email = $this->request->post('confirm_email', '');
+			$confirm_password = $this->request->post('confirm_password', '');
 
-			if (empty($errors)) {
+			if ($isPost) {
+				foreach($user->getFields() as $key => $value) {
+					try {
+						$user->$key = $this->request->post($key, '');
+					} catch (Exception $e) {
+						$errors[$key] = $e->getMessage();
+					}
+				}
 
-				$user_already_exists = $user->checkAlreadyExists();
-				if ($user_already_exists === true) {
-					$errors['email'] = Lang::_('Email already in use');
-				} else {
+				if (empty($confirm_email) || strcmp($user->email, $confirm_email) !== 0) {
+					$errors['confirm_email'] = Lang::_('You must confirm your email');
+				}
+				if (empty($confirm_password) || strcmp($user->password, $confirm_password) !== 0) {
+					$errors['confirm_password'] = Lang::_('You must confirm your password');
+				}
 
-					$user->password = password_hash($user->password, PASSWORD_BCRYPT);
+				if (empty($errors)) {
 
-					$user_id = $user->register();
-
-					if (!empty($user_id)) {
-						$success = $this->login();
+					$user_already_exists = $user->checkAlreadyExists();
+					if ($user_already_exists === true) {
+						$errors['email'] = Lang::_('Email already in use');
 					} else {
-						$errors['register'] = Lang::_('Register failed');
+
+						$user->password = password_hash($user->password, PASSWORD_BCRYPT);
+
+						$user_id = $user->register();
+
+						if (!empty($user_id)) {
+							$success = $this->login();
+						} else {
+							$errors['authent'] = Lang::_('Register failed');
+						}
 					}
 				}
 			}
+
+			$form = $user->getRegisterForm($isPost, $errors);
+
+			$vars = array(
+				'title' => Lang::_('Register'),
+				'isPost' => $isPost,
+				'form' => $form,
+				'errors' => $errors,
+				'success' => $success
+			);
+
+		} catch (Exception $e) {
+			$vars['debug'] = $e->getMessage();
 		}
-
-		$form = $user->getRegisterForm($isPost, $errors);
-
-		$vars = array(
-			'title' => 'Register',
-			'isPost' => $isPost,
-			'form' => $form,
-			'errors' => $errors,
-			'success' => $success
-		);
 
 		return $this->render('authent', $vars);
 	}
@@ -116,7 +143,7 @@ class UserController extends BaseController {
 		$success = Authent::logout();
 
 		$vars = array(
-			'title' => 'Logout',
+			'title' => Lang::_('Logout'),
 			'isPost' => true,
 			'success' => $success
 		);

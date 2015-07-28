@@ -9,19 +9,23 @@
 
 		<div class="col-sm-8 blog-main">
 
-			{if !empty($isPost)}
-				{if !empty($success)}
-					<div class="alert alert-success" role="success">{t}{$title} success{/t}</div>
-					{Utils::redirectJS($HTTP_ROOT, 1)}
-				{/if}
+			{if !empty($errors)}
+			<div class="alert alert-danger" role="danger">{if !empty($errors['authent'])}{$errors['authent']}{else}{$title} {t}failed{/t}{/if}</div>
+			{/if}
 
-				{if !empty($errors)}
-				<div class="alert alert-danger" role="danger">{t}{$title} failed{/t}</div>
-				{/if}
+			{if !empty($isPost) &&!empty($success)}
+				<div class="alert alert-success" role="success">{$title} {t}success{/t}</div>
+				{Utils::redirectJS($HTTP_ROOT, 1)}
 			{/if}
 
 			{if isset($form) && empty($success)}
 				{$form}
+			{/if}
+
+			{if !empty($fb_login_url)}
+			<hr>
+
+			<a href="{$fb_login_url}" class="btn btn-primary">{t}Connect with Facebook{/t}</a>
 			{/if}
 
 		</div>

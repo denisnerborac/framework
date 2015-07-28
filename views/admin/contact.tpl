@@ -9,7 +9,7 @@
 						{/if}
 
                         {if isset($form)}
-                            <a href="{$HTTP_ROOT}admin/contact" class="btn btn-default">{t}Retour{/t}</a>
+                            <a href="{$HTTP_ROOT}admin/contact" class="btn btn-default">{t}Back{/t}</a>
                             <hr>
 
                             {$form}
