@@ -5,7 +5,14 @@
                         <h1 class="page-header">Posts</h1>
 
 						{if isset($table)}
-                             {$table}
+                            {$table}
+                        {/if}
+
+                        {if isset($form)}
+                            <a href="{$HTTP_ROOT}admin/post" class="btn btn-default">{t}Back{/t}</a>
+                            <hr>
+
+                            {$form}
                         {/if}
 
                     </div>
