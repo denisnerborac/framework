@@ -25,6 +25,18 @@ abstract class Model extends Core {
 		return $this->id;
 	}
 
+	protected function _getFieldValue($key, $type, $request = null) {
+		switch($type) {
+			case 'insert':
+				return !is_null($request) && is_object($request) ? $request->post($key) : '';
+			break;
+			case 'update':
+				return $this->$key;
+			break;
+		}
+		return null;
+	}
+
 	private static function _getList($result) {
 		$entity = self::getClass();
 		$items = array();
