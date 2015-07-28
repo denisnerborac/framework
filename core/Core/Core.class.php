@@ -51,7 +51,7 @@ abstract class Core {
 		return $vars;
 	}
 
-	public function getDbFields() {
+	public function getFields() {
 		$vars = $this->getVars();
 
 		unset($vars['table']);

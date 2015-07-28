@@ -3,12 +3,14 @@
 //if (version_compare(PHP_VERSION, '5.3.0') >= 0) {}
 use Facebook\FacebookSession;
 use Facebook\FacebookRequest;
+use Facebook\FacebookRedirectLoginHelper;
 use Facebook\GraphObject;
+use Facebook\GraphUser;
 
 class API_Facebook {
 
-	const FACEBOOK_APP_ID = null;
-	const FACEBOOK_SECRET_KEY = null;
+	const FACEBOOK_APP_ID = '911544085571972';
+	const FACEBOOK_SECRET_KEY = '7783da3269c3fd0925e796904703d867';
 
 	public static $post_types = array(
 		'photo',
@@ -168,5 +170,77 @@ class API_Facebook {
 		}
 
 		return $posts;
+	}
+
+	public static function getLoginUrl($register_url, $scope = 'public_profile,email') {
+
+		self::setDefaultApplication();
+
+		$helper = new FacebookRedirectLoginHelper($register_url);
+
+		return $helper->getLoginUrl(
+			array(
+				'scope' => $scope
+			)
+		);
+	}
+
+	public static function getUser($register_url) {
+
+		try {
+
+			self::setDefaultApplication();
+
+			if (empty($register_url)) {
+				return false;
+			}
+
+			$helper = new FacebookRedirectLoginHelper($register_url);
+
+			$session = $helper->getSessionFromRedirect();
+
+			if (!empty($session)) {
+
+				$request = new FacebookRequest($session, 'GET', '/me');
+				$response = $request->execute();
+				$graphObject = $response->getGraphObject();
+
+				$fb_user = $response->getGraphObject(GraphUser::className());
+
+				if (empty($fb_user)) {
+					throw new Exception(Lang::_('Unable to retrieve your Facebook account'));
+				}
+
+				$user = (Object)null;
+				$user->fb_id = $fb_user->getProperty('id');
+				$user->firstname = $fb_user->getProperty('first_name');
+				$user->lastname = $fb_user->getProperty('last_name');
+				$user->email = $fb_user->getProperty('email');
+
+				if (empty($user->email)) {
+					throw new Exception(Lang::_('Your email address seems to be awaiting for validation, you must confirm your Facebook account before continue'));
+				}
+
+				return $user;
+			}
+
+			return false;
+
+		} catch(Exception $e) {
+			throw new Exception(Lang::_('An error occured during the link of your Facebook account').'<br>'.$e->getMessage());
+			// When Facebook throw an error
+			//if ($e instanceOf FacebookRequestException) {}
+		}
+	}
+
+	public static function isActive() {
+		return (strlen(self::FACEBOOK_APP_ID) && strlen(self::FACEBOOK_SECRET_KEY));
+	}
+
+	private static function setDefaultApplication() {
+		if (!self::isActive()) {
+			throw new Exception(__CLASS__.' Error - Invalid Facebook API configuration');
+		}
+		return FacebookSession::setDefaultApplication(self::FACEBOOK_APP_ID, self::FACEBOOK_SECRET_KEY);
 	}
 }
