@@ -13,7 +13,7 @@
 			<div class="alert alert-danger" role="danger">{if !empty($errors['authent'])}{$errors['authent']}{else}{$title} {t}failed{/t}{/if}</div>
 			{/if}
 
-			{if !empty($isPost) &&!empty($success)}
+			{if !empty($isPost) && !empty($success)}
 				<div class="alert alert-success" role="success">{$title} {t}success{/t}</div>
 				{Utils::redirectJS($HTTP_ROOT, 1)}
 			{/if}
