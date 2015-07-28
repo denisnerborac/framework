@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2015-07-28 01:24+0100\n"
-"PO-Revision-Date: 2015-07-28 01:24+0100\n"
+"POT-Creation-Date: 2015-07-28 19:47+0100\n"
+"PO-Revision-Date: 2015-07-28 19:47+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -31,6 +31,10 @@ msgstr "Rechercher"
 #: controllers/BaseController.class.php:31
 msgid "Contact"
 msgstr "Contact"
+
+#: controllers/UserController.class.php:37
+msgid "Authent failed"
+msgstr "Échec connexion"
 
 #: controllers/UserController.class.php:44 views\partials\navbar.tpl:14
 msgid "Login"
@@ -142,33 +146,37 @@ msgstr "Email"
 msgid "Message"
 msgstr "Message"
 
-#: models/Contact/Contact.class.php:19
+#: models/Contact/Contact.class.php:19 models/User/User.class.php:187
 msgid "Subscribe to the newsletter"
 msgstr "S'abonner à la newsletter"
 
 #: models/Contact/Contact.class.php:20 models/User/User.class.php:188
-msgid "Accept the CGU"
-msgstr "Accepter les CGU"
+msgid "Accept the terms of service"
+msgstr "Accepter les conditions générales d'utilisation"
 
-#: models/Contact/Contact.class.php:54
+#: models/Contact/Contact.class.php:54 models/User/User.class.php:70
 msgid "You must fill your lastname"
 msgstr "Vous devez renseigner votre nom"
 
-#: models/Contact/Contact.class.php:60
+#: models/Contact/Contact.class.php:60 models/User/User.class.php:64
 msgid "You must fill your firstname"
 msgstr "Vous devez renseigner votre prénom"
 
-#: models/Contact/Contact.class.php:66
-msgid "You must fill a valid email"
-msgstr "Vous devez renseigner une adresse email valide"
+#: models/Contact/Contact.class.php:66 models/User/User.class.php:76
+msgid "You must provide a valid email"
+msgstr "Vous devez fournir un email valide"
 
 #: models/Contact/Contact.class.php:72
-msgid "You must fill the message"
-msgstr "Vous devez renseigner votre message"
+msgid "You must fill your message"
+msgstr "Vous devez remplir votre message"
 
-#: models/Contact/Contact.class.php:81
-msgid "You have to accept the ToS"
-msgstr "Vous devez accepter les conditions d'utilisations"
+#: models/Contact/Contact.class.php:81 models/User/User.class.php:94
+msgid "You have to accept the terms of service"
+msgstr "Vous devez accepter les conditions générales d'utilisation"
+
+#: models/User/User.class.php:82
+msgid "You must profide a password with at least 6 chars"
+msgstr "Vous devez fournir un mot de passe de 6 caractères minimum"
 
 #: models/User/User.class.php:163 models/User/User.class.php:185
 msgid "Password"
@@ -185,10 +193,6 @@ msgstr "Confirmation de l'email"
 #: models/User/User.class.php:186
 msgid "Confirm password"
 msgstr "Confirmation du mot de passe"
-
-#: models/User/User.class.php:187
-msgid "Newsletter"
-msgstr "Newsletter"
 
 #: public/tools/lang.php:6 public/tools/lang.php:32
 msgid "Hello world !"
@@ -228,7 +232,7 @@ msgstr "en"
 
 #: views\authent.tpl:13
 msgid "failed"
-msgstr "echec"
+msgstr "échoué(e)"
 
 #: views\authent.tpl:17
 msgid "success"
@@ -303,6 +307,21 @@ msgstr "résultat"
 #: views\search.tpl:27
 msgid "for the search"
 msgstr "pour la recherche"
+
+#~ msgid "You must fill a valid email"
+#~ msgstr "Vous devez renseigner une adresse email valide"
+
+#~ msgid "You must fill the message"
+#~ msgstr "Vous devez renseigner votre message"
+
+#~ msgid "Accept the CGU"
+#~ msgstr "Accepter les CGU"
+
+#~ msgid "You have to accept the ToS"
+#~ msgstr "Vous devez accepter les conditions d'utilisations"
+
+#~ msgid "Newsletter"
+#~ msgstr "Newsletter"
 
 #~ msgid "1 post"
 #~ msgstr "1 article"
