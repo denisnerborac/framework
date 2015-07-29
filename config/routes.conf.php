@@ -35,42 +35,17 @@ $routes = array(
 		'action' => 'logout'
 	),
 
-
 	##### Backoffice ####
 
 	/* Contact */
-	'admin/contact/create' => array(
+	'admin/contact/([a-zA-Z-_]+)/?([0-9]*)' => array(
 		'target' => 'admin',
-		'action' => 'contact_edit'
-	),
-	'admin/contact/update/([0-9\-]+)' => array(
-		'target' => 'admin',
-		'action' => 'contact_edit'
-	),
-	'admin/contact/edit/([0-9\-]+)' => array(
-		'target' => 'admin',
-		'action' => 'contact_edit'
-	),
-	'admin/contact/delete/([0-9\-]+)' => array(
-		'target' => 'admin',
-		'action' => 'contact_delete'
+		'action' => 'contact_action'
 	),
 
 	/* Post */
-	'admin/post/create' => array(
+	'admin/post/([a-zA-Z-_]+)/?([0-9]*)' => array(
 		'target' => 'admin',
-		'action' => 'post_create'
-	),
-	'admin/post/update/([0-9\-]+)' => array(
-		'target' => 'admin',
-		'action' => 'post_update'
-	),
-	'admin/post/edit/([0-9\-]+)' => array(
-		'target' => 'admin',
-		'action' => 'post_edit'
-	),
-	'admin/post/delete/([0-9\-]+)' => array(
-		'target' => 'admin',
-		'action' => 'post_delete'
+		'action' => 'post_action'
 	)
 );

@@ -48,6 +48,9 @@ class Post extends Model {
 		$this->content = $content;
 	}
 	public function setDate($date) {
+		if (empty($date)) {
+			return false;
+		}
 		if (strtotime($date) === false) {
 			throw new Exception(Lang::_('Post date must be valid'));
 		}
@@ -60,9 +63,51 @@ class Post extends Model {
 		$form->addField('author', Lang::_('Author'), 'text', $this->_getfieldvalue('author', $type, $request), true, '', @$errors['author']);
 		$form->addField('title', Lang::_('Title'), 'text', $this->_getfieldvalue('title', $type, $request), true, '', @$errors['title']);
 		$form->addField('content', Lang::_('Content'), 'text', $this->_getfieldvalue('content', $type, $request), true, '', @$errors['content']);
-		$form->addField('date', Lang::_('Date'), 'text', $this->_getfieldvalue('date', $type, $request), false, '', @$errors['date']);
+		$form->addField('date', Lang::_('Date'), 'date', $this->_getfieldvalue('date', $type, $request), false, '', @$errors['date']);
 
 		return $form;
+	}
+
+	public function insert() {
+
+		return Db::insert(
+			'INSERT INTO post (author, title, content, date)
+		 	 VALUES (:author, :title, :content, :date)',
+			array(
+				'author' => $this->author,
+				'title' => $this->title,
+				'content' => $this->content,
+				'date' => $this->date ?: date('Y-m-d H:i:s')
+			)
+		);
+	}
+
+	public function update() {
+
+		if (empty($this->id)) {
+			throw new Exception('Update error - Undefined post id');
+		}
+
+		return Db::update(
+			'UPDATE post SET author = :author, title = :title, content = :content, date = :date
+		 	 WHERE id = :id',
+			array(
+				'author' => $this->author,
+				'title' => $this->title,
+				'content' => $this->content,
+				'date' => $this->date ?: date('Y-m-d H:i:s'),
+				'id' => (int) $this->id
+			)
+		);
+	}
+
+	public function delete() {
+
+		if (empty($this->id)) {
+			throw new Exception('Delete error - Undefined post id');
+		}
+
+		return Db::delete('DELETE FROM post WHERE id = :id', array('id' => $this->id));
 	}
 
 }

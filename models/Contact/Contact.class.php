@@ -98,4 +98,34 @@ class Contact extends Model {
 			)
 		);
 	}
+
+	public function update() {
+
+		if (empty($this->id)) {
+			throw new Exception('Update error - Undefined contact id');
+		}
+
+		return Db::update(
+			'UPDATE contact SET lastname = :lastname, firstname = :firstname, email = :email, newsletter = :newsletter, cgu = :cgu, message = :message, date = NOW()
+		 	 WHERE id = :id',
+			array(
+				'lastname' => $this->lastname,
+				'firstname' => $this->firstname,
+				'email' => $this->email,
+				'newsletter' => (int) $this->newsletter,
+				'cgu' => (int) $this->cgu,
+				'message' => $this->message,
+				'id' => (int) $this->id
+			)
+		);
+	}
+
+	public function delete() {
+
+		if (empty($this->id)) {
+			throw new Exception('Delete error - Undefined contact id');
+		}
+
+		return Db::delete('DELETE FROM contact WHERE id = :id', array('id' => $this->id));
+	}
 }

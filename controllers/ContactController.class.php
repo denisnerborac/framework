@@ -26,7 +26,7 @@ class ContactController extends BaseController {
 			}
 
 			if (empty($errors)) {
-				$success = $result = $contact->insert();
+				$success = $contact->insert();
 			}
 		}
 
