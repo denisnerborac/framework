@@ -8,7 +8,10 @@
 
 				<div class="form-group{if !empty($isSubmit)}{if !empty($fields[key]->error)} has-error{else} has-success{/if}{/if}">
 
-					{if $fields[key]->type == 'text' || $fields[key]->type == 'email' || $fields[key]->type == 'password'}
+					{if $fields[key]->type == 'text' ||
+						$fields[key]->type == 'email' ||
+						$fields[key]->type == 'date' ||
+						$fields[key]->type == 'password'}
 					<label for="{$fields[key]->name}" class="col-sm-2 control-label">{$fields[key]->label}</label>
 					<div class="col-sm-10">
 						<input type="{$fields[key]->type}" class="form-control{if $fields[key]->required} required{/if}{$fields[key]->class}" id="{$fields[key]->name}" name="{$fields[key]->name}" {if isset($fields[key]->maxlength) && $fields[key]->maxlength > 0} maxlength="{$fields[key]->maxlength}"{/if} placeholder="{$fields[key]->label}" value="{$fields[key]->value}">

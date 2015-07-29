@@ -27,8 +27,8 @@ abstract class Model extends Core {
 
 	protected function _getFieldValue($key, $type, $request = null) {
 		switch($type) {
-			case 'insert':
-				return !is_null($request) && is_object($request) ? $request->post($key) : '';
+			case 'create':
+				return !is_null($request) && is_object($request) ? $request->post($key) : null;
 			break;
 			case 'update':
 				return $this->$key;
