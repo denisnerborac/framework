@@ -9,9 +9,10 @@
 
 	<title>{$website_title} - {$title}</title>
 
-	<link rel="stylesheet" href="{$CSS_ROOT}bootstrap.min.css">
+	<link rel="stylesheet" href="{$CSS_ROOT}{if !empty($current_theme)}themes/{$current_theme}/{/if}bootstrap.min.css">
 	<link rel="stylesheet" href="{$CSS_ROOT}bootstrap-theme.min.css">
 	<link rel="stylesheet" href="{$CSS_ROOT}styles.css">
+
 </head>
 
 <body>

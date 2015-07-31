@@ -46,6 +46,15 @@ abstract class BaseController extends Controller {
 
 		$vars['archives_dates'] = $archives_dates;
 
+		$vars['themes'] = glob(CSS_PATH.'themes/*');
+
+		$current_theme = $this->request->get('theme', '');
+		if (!empty($current_theme)) {
+			$this->session->theme = $current_theme;
+		}
+
+		$vars['current_theme'] = $this->session->theme ?: $current_theme;
+
 		$this->response->addVars($vars);
 	}
 
