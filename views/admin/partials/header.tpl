@@ -17,6 +17,11 @@
     <link href="{$CSS_ROOT}admin/dataTables.bootstrap.css" rel="stylesheet">
     <link href="{$CSS_ROOT}admin/dataTables.responsive.css" rel="stylesheet">
 
+    <!--<link rel="stylesheet" href="demo_files/main.css" type="text/css" />
+    <link rel="stylesheet" href="demo_files/demos.css" type="text/css" />-->
+    <link rel="stylesheet" href="{$CSS_ROOT}admin/jquery.Jcrop.min.css" type="text/css" />
+
+
     <link href="{$CSS_ROOT}admin/styles.css" rel="stylesheet">
 
     <!-- Custom Fonts -->

@@ -6,7 +6,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">SB Admin v2.0</a>
+                <a class="navbar-brand" href="{$HTTP_ROOT}admin">Admin</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -28,7 +28,6 @@
                             </form>
                             <!-- /input-group -->
                         </li>
-
 
                         {foreach $pages as $page_url => $page_params}
                         <li><a href="{$HTTP_ROOT}{$page_url}"{if $page_url == $current_page} class="active"{/if}><i class="fa {$page_params[1]} fa-fw"></i> {$page_params[0]}</a></li>

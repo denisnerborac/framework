@@ -11,6 +11,8 @@
     <script src="{$JS_ROOT}admin/metisMenu.min.js"></script>
 	<script src="{$JS_ROOT}admin/jquery.dataTables.min.js"></script>
 	<script src="{$JS_ROOT}admin/dataTables.bootstrap.min.js"></script>
+    <script src="{$JS_ROOT}admin/jquery.color.js"></script>
+    <script src="{$JS_ROOT}admin/jquery.Jcrop.min.js"></script>
     <script src="{$JS_ROOT}admin/admin.js"></script>
 
 </body>
