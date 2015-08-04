@@ -5,6 +5,14 @@ if (!defined('PASSWORD_BCRYPT')) {
     define('PASSWORD_BCRYPT_DEFAULT_COST', 10);
 }
 
+if(!function_exists('hash_equals')) {
+    function hash_equals($a, $b) {
+        $ret = strlen($a) ^ strlen($b);
+        $ret |= array_sum(unpack("C*", $a^$b));
+        return !$ret;
+    }
+}
+
 // PHP_VERSION < 5.3.7
 if (version_compare(PHP_VERSION, '5.3.7') == -1) {
 
