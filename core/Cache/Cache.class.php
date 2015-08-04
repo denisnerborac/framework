@@ -3,33 +3,41 @@
 class Cache {
 
 	private $path;
-	public $type;
-	public $expire;
+	private $file;
+	private $type;
+	private $expire;
 
-	public function __construct($type = 'default', $path = CACHE_PATH) {
-		$this->type = $type;
-		$this->path = $path;
-	}
+	public function __construct($file, $type = 'data', $expire = 0) {
 
-	private function _getPath($file) {
-		return $this->path.'/'.$this->type.'/'.$file;
-	}
-
-	public function read($key) {
-
-		$cache = $this->_getPath($key);
-
-		if (!file_exists($cache) ||
-			filemtime($cache) > $this->expire) {
-			return false;
+		if (empty($file)) {
+			throw new Exception('Cache error - Undefined cache file');
 		}
 
-		return file_get_contents($cache);
+		$this->file = strpos($file, '.cache') === false ? $file.'.cache' : $file;
+		$this->type = $type;
+		$this->expire = $expire;
 	}
 
-	public function write($key, $value) {
-		$cache = $this->_getPath($key);
-		return file_put_contents($cache, $value);
+	public function read() {
+
+		$cache = $this->_getPath();
+
+		if (!file_exists($cache) ||	filemtime($cache) < self::_getTime() - $this->expire) {
+			return false;
+		}
+		return unserialize(file_get_contents($cache));
 	}
 
+	public function write($value) {
+		$cache = $this->_getPath();
+		return file_put_contents($cache, serialize($value));
+	}
+
+	private static function _getTime() {
+		return time();
+	}
+
+	private function _getPath() {
+		return CACHE_PATH.$this->type.'/'.$this->file;
+	}
 }
