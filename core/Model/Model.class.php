@@ -28,6 +28,7 @@ abstract class Model extends Core {
 
 		$args = func_get_args();
 		$vars = !empty($args[0]) ? $args[0] : array();
+		$on_duplicate_key = (bool) !empty($args[1]) ? $args[1] : false;
 
 		if (empty($vars)) {
 			throw new Exception('Insert error - No '.self::getClass().' data to insert');
@@ -37,7 +38,12 @@ abstract class Model extends Core {
 		foreach($vars as $key => $value) {
 			$sql .= ', '.$key.' = :'.$key;
 		}
-
+		if ($on_duplicate_key === true) {
+			$sql .= ' ON DUPLICATE KEY UPDATE id = id';
+			foreach($vars as $key => $value) {
+				$sql .= ', '.$key.' = :'.$key;
+			}
+		}
 		return Db::insert($sql, $vars);
 	}
 
