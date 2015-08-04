@@ -3,9 +3,7 @@ require_once '../../config/core.conf.php';
 
 header('Content-type: text/html; charset='.Lang::$encoding);
 
-
-
-$source = file_get_contents('source.txt');
+$source = file_get_contents(__DIR__.'/source.txt');
 $separator = PHP_EOL.PHP_EOL;
 // FIX MAC OS end lines
 //$separator = "\r\n\r\n";
@@ -27,7 +25,7 @@ for($i = 0; $i < 50; $i++) {
 	// Else insert break lines
 	$content = wordwrap($content, 200, '.<br /><br />');
 
-	$date = Utils::getRandomDate(array(2014, 2015));
+	$date = Utils::getRandomDate(array(2014, 2015), $max_now = true);
 
 	$results[] = array(
 		'author' => ucfirst($author),
@@ -42,7 +40,7 @@ for($i = 0; $i < 50; $i++) {
 
 $db = Db::getInstance();
 
-$query = $db->prepare('INSERT INTO posts (author, title, content, date) VALUES (:author, :title, :content, :date)');
+$query = $db->prepare('INSERT INTO post (author, title, content, date) VALUES (:author, :title, :content, :date)');
 
 $query->bindParam('author', $author);
 $query->bindParam('title', $title);
@@ -50,6 +48,7 @@ $query->bindParam('content', $content);
 $query->bindParam('date', $date);
 
 foreach($results as $key => $result) {
+
 	$author = $result['author'];
 	$title = $result['title'];
 	$content = $result['content'];
