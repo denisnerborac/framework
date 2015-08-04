@@ -84,48 +84,29 @@ class Contact extends Model {
 	}
 
 	public function insert() {
-
-		return Db::insert(
-			'INSERT INTO contact (lastname, firstname, email, newsletter, cgu, message, date)
-		 	 VALUES (:lastname, :firstname, :email, :newsletter, :cgu, :message, NOW())',
-			array(
-				'lastname' => $this->lastname,
-				'firstname' => $this->firstname,
-				'email' => $this->email,
-				'newsletter' => (int) $this->newsletter,
-				'cgu' => (int) $this->cgu,
-				'message' => $this->message
-			)
-		);
+		return parent::insert(array(
+			'lastname' => $this->lastname,
+			'firstname' => $this->firstname,
+			'email' => $this->email,
+			'message' => $this->message,
+			'newsletter' => (int) $this->newsletter,
+			'cgu' => (int) $this->cgu
+		));
 	}
 
 	public function update() {
-
-		if (empty($this->id)) {
-			throw new Exception('Update error - Undefined contact id');
-		}
-
-		return Db::update(
-			'UPDATE contact SET lastname = :lastname, firstname = :firstname, email = :email, newsletter = :newsletter, cgu = :cgu, message = :message, date = NOW()
-		 	 WHERE id = :id',
-			array(
-				'lastname' => $this->lastname,
-				'firstname' => $this->firstname,
-				'email' => $this->email,
-				'newsletter' => (int) $this->newsletter,
-				'cgu' => (int) $this->cgu,
-				'message' => $this->message,
-				'id' => (int) $this->id
-			)
-		);
+		return parent::update(array(
+			'lastname' => $this->lastname,
+			'firstname' => $this->firstname,
+			'email' => $this->email,
+			'message' => $this->message,
+			'newsletter' => (int) $this->newsletter,
+			'cgu' => (int) $this->cgu,
+			'id' => (int) $this->id
+		));
 	}
 
 	public function delete() {
-
-		if (empty($this->id)) {
-			throw new Exception('Delete error - Undefined contact id');
-		}
-
-		return Db::delete('DELETE FROM contact WHERE id = :id', array('id' => $this->id));
+		return parent::delete();
 	}
 }
