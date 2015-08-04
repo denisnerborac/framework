@@ -30,7 +30,7 @@
 
 				{include file="partials/post-list-item.tpl"}
 
-				{include file="partials/pagination.tpl" querystring="?q={$search_query}"}
+				{include file="partials/pagination.tpl" uri="{$HTTP_ROOT}search/results/" querystring="?q={$search_query}"}
 
 				{/if}
 

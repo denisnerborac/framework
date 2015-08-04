@@ -1,3 +1,4 @@
+{if empty($isAjax)}
 <!DOCTYPE html>
 <html lang="{$lang}">
 <head>
@@ -10,8 +11,12 @@
 	<title>{$website_title} - {$title}</title>
 
 	<link rel="stylesheet" href="{$CSS_ROOT}{if !empty($current_theme)}themes/{$current_theme}/{/if}bootstrap.min.css">
+	{if empty($current_theme)}
 	<link rel="stylesheet" href="{$CSS_ROOT}bootstrap-theme.min.css">
 	<link rel="stylesheet" href="{$CSS_ROOT}styles.css">
+	{/if}
+	<link rel="stylesheet" href="{$CSS_ROOT}font-awesome.min.css">
+	<link rel="stylesheet" href="{$CSS_ROOT}reset.css">
 
 </head>
 
@@ -19,4 +24,5 @@
 
 	{include file="partials/navbar.tpl"}
 
-	<div class="container blog-content">
+	<div id="main-container" class="container blog-content">
+{/if}

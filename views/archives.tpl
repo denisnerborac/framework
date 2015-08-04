@@ -17,7 +17,7 @@
 
 				{include file="partials/post-list-item.tpl"}
 
-				{include file="partials/pagination.tpl" uri="{$uri}{$date}/"}
+				{include file="partials/pagination.tpl" uri="{$HTTP_ROOT}{$uri}{$date}/"}
 
 			</div><!-- /.blog-main -->
 

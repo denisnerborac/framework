@@ -1,3 +1,4 @@
+
 				{if !isset($uri)}
 				{assign var="uri" value=""}
 				{/if}
