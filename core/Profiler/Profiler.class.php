@@ -29,8 +29,12 @@ class Profiler {
 	}
 
 	/* Time */
-	public function getElapsedTime() {
-		return $this->timer->elapsed();
+	public function getElapsedTime($format = false) {
+		$elapsed = $this->timer->elapsed();
+		if (!empty($format)) {
+			return Utils::formatTime($elapsed);
+		}
+		return $elapsed;
 	}
 
 	public function getTimeLimit() {
@@ -40,6 +44,10 @@ class Profiler {
 	/* Memory */
 	public function getMemoryUsage() {
 		return Utils::getSize($this->mem_stop - $this->mem_start);
+	}
+
+	public function getMemoryTotalUsage() {
+		return Utils::getSize($this->mem_stop);
 	}
 
 	public function getMemoryPeakUsage() {

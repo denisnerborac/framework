@@ -48,7 +48,7 @@ abstract class Controller {
 		$router->dispatch($this);
 
 		$this->route = $this->target.'/'.$this->action.'/'.implode('/', $this->params);
-		$this->uri = ROOT_HTTP.$this->target.'/'.$this->action.'/';
+		$this->uri = $this->target.'/'.$this->action.'/';
 
 		if (empty($lang)) {
 			$lang = Lang::getDefaultLang();

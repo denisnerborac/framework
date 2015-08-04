@@ -39,7 +39,7 @@ class Timer {
 	}
 
 	private function _getTime() {
-		return microtime();
+		return microtime(true);
 	}
 
 	private function _getElapsedTime() {

@@ -1,7 +1,7 @@
 <?php
 class ViewException extends CustomException {};
 
-class View extends \Smarty
+class View extends Smarty
 {
 	private $template;
 
