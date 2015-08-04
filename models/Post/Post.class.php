@@ -19,7 +19,7 @@ class Post extends Model {
 		return ucfirst($this->title);
 	}
 	public function getContent() {
-		return nl2br(htmlspecialchars($this->content));
+		return nl2br($this->content);
 	}
 	public function getDate($format = 'Y-m-d H:i:s') {
 		return date($format, strtotime($this->date));
@@ -45,7 +45,7 @@ class Post extends Model {
 		if (empty($content) || strlen($content) > 65536) {
 			throw new Exception(Lang::_('Post content cannot be empty and must be 65536 chars max'));
 		}
-		$this->content = $content;
+		$this->content = strip_tags($content);
 	}
 	public function setDate($date) {
 		if (empty($date)) {
@@ -69,10 +69,7 @@ class Post extends Model {
 	}
 
 	public function insert() {
-
-		return Db::insert(
-			'INSERT INTO post (author, title, content, date)
-		 	 VALUES (:author, :title, :content, :date)',
+		return parent::insert(
 			array(
 				'author' => $this->author,
 				'title' => $this->title,
@@ -83,14 +80,7 @@ class Post extends Model {
 	}
 
 	public function update() {
-
-		if (empty($this->id)) {
-			throw new Exception('Update error - Undefined post id');
-		}
-
-		return Db::update(
-			'UPDATE post SET author = :author, title = :title, content = :content, date = :date
-		 	 WHERE id = :id',
+		return parent::update(
 			array(
 				'author' => $this->author,
 				'title' => $this->title,
@@ -101,13 +91,5 @@ class Post extends Model {
 		);
 	}
 
-	public function delete() {
-
-		if (empty($this->id)) {
-			throw new Exception('Delete error - Undefined post id');
-		}
-
-		return Db::delete('DELETE FROM post WHERE id = :id', array('id' => $this->id));
-	}
 
 }

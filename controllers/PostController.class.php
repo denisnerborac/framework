@@ -33,7 +33,18 @@ class PostController extends BaseController {
 		$time = strtotime($date);
 		$date_label = ucfirst(Lang::_(strtolower(date('F', $time)))).' '.date('Y', $time);
 
-		$pagination = new Pagination('SELECT * FROM post WHERE DATE_FORMAT(date, "%Y-%m") = :date ORDER BY date DESC', array(':date' => $date), 4, $page - 1);
+		$cache_name = 'post-archives-'.$date.'-'.$page;
+		$cache = new Cache($cache_name, 'data', 86400 * 365); // expire dans 365 jours
+
+		$cache_result = $cache->read($cache_name);
+
+		if ($cache_result !== false) {
+			$pagination = $cache_result;
+		} else {
+			$nb_posts_per_page = 10;
+			$pagination = new Pagination('SELECT * FROM post WHERE DATE_FORMAT(date, "%Y-%m") = :date ORDER BY date DESC', array(':date' => $date), $nb_posts_per_page, $page - 1);
+			$cache->write($pagination);
+		}
 
 		/*
 		// Same with date split without mysql function DATE_FORMAT()
