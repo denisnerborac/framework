@@ -30,6 +30,9 @@ define('CSS_HTTP', STATICS_HTTP.'css/');
 define('JS_HTTP', STATICS_HTTP.'js/');
 define('IMG_HTTP', STATICS_HTTP.'img/');
 
+// AJAX
+define('GLOBAL_AJAX', true);
+
 // CONTROLLERS
 define('DEFAULT_CONTROLLER_TARGET', 'home');
 define('DEFAULT_CONTROLLER_ACTION', 'index');
