@@ -10,6 +10,7 @@ abstract class BaseController extends Controller {
 			'CSS_ROOT' => CSS_HTTP,
 			'JS_ROOT' => JS_HTTP,
 			'IMG_ROOT' => IMG_HTTP,
+			'GLOBAL_AJAX' => GLOBAL_AJAX,
 			'referer' => REFERER,
 			'uri' => $this->getUri(),
 			'querystring' => $this->getQueryString(),
@@ -17,6 +18,7 @@ abstract class BaseController extends Controller {
 			'target' => $this->target,
 			'action' => $this->action,
 			'lang' => $this->lang->getUserLang(),
+			'isAjax' => $this->request->isAjax(),
 			'website_title' => 'Website Title',
 			'website_description' => 'Website Description',
 			'author' => 'Website Author',
@@ -25,10 +27,10 @@ abstract class BaseController extends Controller {
 		);
 
 		$vars['pages'] = array(
-			array('url' => 'home', 'name' => Lang::_('Home')),
-			array('url' => 'post/archives', 'name' => Lang::_('Archives')),
-			array('url' => 'search', 'name' => Lang::_('Search')),
-			array('url' => 'contact', 'name' => Lang::_('Contact'))
+			'home' => Lang::_('Home'),
+			'post/archives' => Lang::_('Archives'),
+			'search' => Lang::_('Search'),
+			'contact' => Lang::_('Contact'),
 		);
 
 		if (User::isLogged()) {
