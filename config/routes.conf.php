@@ -6,7 +6,7 @@ $routes = array(
 
 	#### Front ####
 
-	'/' => array(
+	'[/]?([0-9]*)' => array(
 		'target' => DEFAULT_CONTROLLER_TARGET,
 		'action' => DEFAULT_CONTROLLER_ACTION
 	),
