@@ -6,6 +6,7 @@ class Curl {
 	private $options;
 	private $cnx;
 	private $result;
+	private $http_code;
 
 	public function __construct($url, $options = array()) {
 
@@ -31,7 +32,7 @@ class Curl {
 
 	public function exec() {
 
-		ob_start();
+		$this->http_code = curl_getinfo($this->cnx, CURLINFO_HTTP_CODE);
 
 		if (false === $this->result = curl_exec($this->cnx)) {
 
@@ -43,9 +44,11 @@ class Curl {
 
 		curl_close($this->cnx);
 
-		ob_clean();
-
 		return $this->result;
+	}
+
+	public function getHttpCode() {
+		return $this->http_code;
 	}
 
 	private static $error_codes = array(

@@ -32,7 +32,7 @@ var app = {
 
 			var data = isFormButton && form !== null ? form.serialize() : [];
 
-console.log(location);
+			//console.log(location);
 
 			if (url !== null && (url.indexOf('http') === -1 || url.indexOf(HTTP_ROOT) !== -1 || HTTP_ROOT.indexOf(url) !== -1)) {
 

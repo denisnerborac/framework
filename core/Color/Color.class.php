@@ -177,8 +177,7 @@ class Color {
 		$gradient_rgb_color_array = Color::getMidColors($gradient_start_color, $gradient_end_color, 12);
 		$gradient_hex_color_array = array();
 
-		foreach($gradient_rgb_color_array as $k => $gradient_rgb_color)
-		{
+		foreach($gradient_rgb_color_array as $k => $gradient_rgb_color)	{
 			$gradient_hex_color_array[] = (true===$_webSafeColors?Color::getWebSafeColor(Color::convertColor($gradient_rgb_color)):Color::convertColor($gradient_rgb_color));
 		}
 
