@@ -1,13 +1,13 @@
 {if empty($isAjax)}
 
-	</div><!-- /.container -->
+		<footer class="blog-footer">
+			<p>{$website_title} &copy; {date('Y')}</p>
+			<p>
+				<a href="#">{t}Back to top{/t}</a>
+			</p>
+		</footer>
 
-	<footer class="blog-footer">
-		<p>{$website_title} &copy; 2015</p>
-		<p>
-			<a href="#">{t}Back to top{/t}</a>
-		</p>
-	</footer>
+	</div><!-- /.container -->
 
 	{include file="partials/debug.tpl"}
 

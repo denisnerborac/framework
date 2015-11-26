@@ -8,8 +8,14 @@ class Timer {
 
 	public function __construct($start = true) {
 		if ($start) {
-			$this->start();
+			$this->start(true);
 		}
+	}
+
+	public static function microtime_float()
+	{
+	    list($usec, $sec) = explode(" ", microtime());
+	    return ((float)$usec + (float)$sec);
 	}
 
 	public function start($reset = false) {
