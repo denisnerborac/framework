@@ -8,7 +8,7 @@ class Timer {
 
 	public function __construct($start = true) {
 		if ($start) {
-			$this->start();
+			$this->start(true);
 		}
 	}
 

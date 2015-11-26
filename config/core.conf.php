@@ -2,6 +2,10 @@
 // DEBUG
 define('CORE_DEBUG', 1);
 
+// ERRORS CONFIG
+error_reporting((CORE_DEBUG ? (E_ALL | E_STRICT) : 0));
+ini_set('display_errors', (CORE_DEBUG ? 1 : 0));
+
 // PATHS
 define('CONFIG_DIR', 'config');
 define('ROOT_DIR', trim(str_replace($_SERVER['DOCUMENT_ROOT'], '', str_replace(array('\\', CONFIG_DIR), array('/', ''), __DIR__)), '/'));
@@ -60,10 +64,6 @@ if ($_SERVER['HTTP_HOST'] == 'localhost') {
 }
 define('DB_ENGINE', 'mysql');
 define('DB_NAME', 'blog');
-
-// ERRORS CONFIG
-error_reporting((CORE_DEBUG ? (E_ALL | E_STRICT) : 0));
-ini_set('display_errors', (CORE_DEBUG ? 1 : 0));
 
 // CHECK ROOT_PATH
 if (!is_dir(ROOT_PATH)) {
