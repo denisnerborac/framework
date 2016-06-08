@@ -35,7 +35,7 @@ define('JS_HTTP', STATICS_HTTP.'js/');
 define('IMG_HTTP', STATICS_HTTP.'img/');
 
 // AJAX
-define('GLOBAL_AJAX', true);
+define('GLOBAL_AJAX', false);
 
 // CONTROLLERS
 define('DEFAULT_CONTROLLER_TARGET', 'home');
@@ -73,7 +73,7 @@ if (!is_dir(ROOT_PATH)) {
 	$error = 'ROOT_PATH ('.ROOT_PATH.') not found in '.__FILE__;
 	error_log($error, 3, ini_get('error_log'));
 	if (CORE_DEBUG) {
-    	exit($error);
+		exit($error);
 	}
 	exit();
 }
@@ -88,9 +88,9 @@ if (!function_exists('password_hash')) {
 
 // PHP < 5.3
 if (false === function_exists('lcfirst')) {
-    function lcfirst($str) {
-        return Utils::lcfirst($str);
-    }
+	function lcfirst($str) {
+		return Utils::lcfirst($str);
+	}
 }
 
 // ROUTES

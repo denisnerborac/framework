@@ -30,6 +30,10 @@ abstract class BaseController extends Controller {
 			'home' => Lang::_('Home'),
 			'post/archives' => Lang::_('Archives'),
 			'search' => Lang::_('Search'),
+			'' => array('Map', array(
+				'map/geolocation' => Lang::_('Geolocation'),
+				'map/geocoding' => Lang::_('Geocoding'),
+			)),
 			'contact' => Lang::_('Contact'),
 		);
 

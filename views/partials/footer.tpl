@@ -20,7 +20,7 @@
 
 	<script>
 	var HTTP_ROOT = '{$HTTP_ROOT}';
-	var GLOBAL_AJAX = {$GLOBAL_AJAX};
+	var GLOBAL_AJAX = {if !empty($GLOBAL_AJAX)}true{else}false{/if};
 	</script>
 	<script src="{$JS_ROOT}app.js"></script>
 

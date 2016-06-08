@@ -1,6 +1,14 @@
 <?php
 class Utils {
 
+	public static function debug($array, $fetch = false) {
+		$debug = '<pre>'.print_r($array, true).'</pre>';
+		if ($fetch) {
+			return $debug;
+		}
+		echo $debug;
+	}
+
 	public static function isDecimal($input){
 	    return !(ctype_digit(strval($input)));
 	}

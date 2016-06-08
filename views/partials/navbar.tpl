@@ -24,7 +24,7 @@
 								<a href="{$page_url}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{$page[0]} <span class="caret"></span></a>
 								<ul class="dropdown-menu" role="menu">
 									{foreach $page[1] as $subpage_url => $subpage}
-									<li><a href="{$subpage_url}">{$subpage}</a></li>
+									<li><a href="{$HTTP_ROOT}{$subpage_url}">{$subpage}</a></li>
 									<!--<li role="separator" class="divider"></li>-->
 									{/foreach}
 								</ul>
